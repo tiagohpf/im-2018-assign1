@@ -17,8 +17,15 @@
 		<item>square<tag>out="SQUARE"</tag></item>
 		<item>circle<tag>out="CIRCLE"</tag></item>
 		<item>triangle<tag>out="TRIANGLE"</tag></item>
-      <item>Play<tag>out="PLAY"</tag></item>
-      <item>Shuffle this playlist</item>
+      <item>Play song<tag>out="PLAY"</tag></item>
+      <item>Play artist<tag>out="PLAY"</tag></item>
+      <item>Play playlist<tag>out="PLAY"</tag></item>
+      <item>Pause<tag>out="PLAY"</tag></item>
+      <item>Skip<tag>out="PLAY"</tag></item>
+      <item>Back<tag>out="PLAY"</tag></item>
+      <item>Volume up<tag>out="PLAY"</tag></item>
+      <item>Volume down<tag>out="PLAY"</tag></item>
+      <item>Play shuffle mode</item>
       <item></item>
 	  </one-of>
 	</rule>
