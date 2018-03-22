@@ -14,9 +14,9 @@
 	</rule>
 	<rule id="object">
 	  <one-of>
-		<item>quadrado<tag>out="SQUARE"</tag></item>
-		<item>círculo<tag>out="CIRCLE"</tag></item>
-		<item>triângulo<tag>out="TRIANGLE"</tag></item>
+		<item>square<tag>out="SQUARE"</tag></item>
+		<item>circle<tag>out="CIRCLE"</tag></item>
+		<item>triangle<tag>out="TRIANGLE"</tag></item>
       <item>Play<tag>out="PLAY"</tag></item>
       <item>Shuffle this playlist</item>
       <item></item>
