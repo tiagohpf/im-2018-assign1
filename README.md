@@ -1,6 +1,6 @@
 # Spotify Voice Controller
 
-An software that controls task of Spotify with voice.
+An software that controls tasks of Spotify with voice.
 
 ### Dependencies
 
