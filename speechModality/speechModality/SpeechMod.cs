@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using mmisharp;
 using Microsoft.Speech.Recognition;
+using System.Windows;
+using SpotifyAPI.Web;
+using SpotifyAPI.Web.Auth;
+using SpotifyAPI.Web.Enums;
 
 namespace speechModality
 {
@@ -27,6 +31,8 @@ namespace speechModality
 
         public SpeechMod()
         {
+            SpotifyAPI spotify = new SpotifyAPI();
+            
             //init LifeCycleEvents..
             lce = new LifeCycleEvents("ASR", "FUSION","speech-1", "acoustic", "command"); // LifeCycleEvents(string source, string target, string id, string medium, string mode)
             //mmic = new MmiCommunication("localhost",9876,"User1", "ASR");  //PORT TO FUSION - uncomment this line to work with fusion later
@@ -35,11 +41,11 @@ namespace speechModality
             mmic.Send(lce.NewContextRequest());
 
             //load pt recognizer
-            sre = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-US"));
+            sre = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("pt-PT"));
             gr = new Grammar(Environment.CurrentDirectory + "\\ptG.grxml", "rootRule");
             sre.LoadGrammar(gr);
 
-            Console.Write("Cenas");
+            
             sre.SetInputToDefaultAudioDevice();
             sre.RecognizeAsync(RecognizeMode.Multiple);
             sre.SpeechRecognized += Sre_SpeechRecognized;
