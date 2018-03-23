@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<grammar xml:lang="pt-PT" version="1.0" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+<grammar xml:lang="en-US" version="1.0" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
 	<rule id="rootRule" scope="public">
 	  <item>
 		  <item>
@@ -17,6 +17,16 @@
 		<item>quadrado<tag>out="SQUARE"</tag></item>
 		<item>círculo<tag>out="CIRCLE"</tag></item>
 		<item>triângulo<tag>out="TRIANGLE"</tag></item>
+      <item>Play</item>
+      <item>Play artist</item>
+      <item>Play band</item>
+      <item>Pause</item>
+      <item>Resume</item>
+      <item>Skip</item>
+      <item>Go back</item>
+      <item>Volume up</item>
+      <item>Volume down</item>
+      <item>Play shuffle mode</item>
 	  </one-of>
 	</rule>
 	<rule id="color">

@@ -30,11 +30,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Shell;
 using speechModality;
-using SpotifyAPI;
-using System.Threading.Tasks;
-using SpotifyAPI.Web.Enums;
-using SpotifyAPI.Web.Auth;
-using SpotifyAPI.Web;
 
 
 namespace speechModality {

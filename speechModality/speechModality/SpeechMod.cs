@@ -41,7 +41,7 @@ namespace speechModality
             mmic.Send(lce.NewContextRequest());
 
             //load pt recognizer
-            sre = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("pt-PT"));
+            sre = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-US"));
             gr = new Grammar(Environment.CurrentDirectory + "\\ptG.grxml", "rootRule");
             sre.LoadGrammar(gr);
 
