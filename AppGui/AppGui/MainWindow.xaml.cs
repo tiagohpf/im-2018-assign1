@@ -7,7 +7,9 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using mmisharp;
 using Newtonsoft.Json;
-using SpotifyAPI;
+using SpotifyAPI.Local; //Base Namespace
+using SpotifyAPI.Local.Enums; //Enums
+using SpotifyAPI.Local.Models; //Models for the JSON-responses
 
 namespace AppGui
 {
@@ -17,11 +19,35 @@ namespace AppGui
     public partial class MainWindow : Window
     {
         private MmiCommunication mmiC;
+        private static SpotifyLocalAPI spotify;
         public MainWindow()
         {
             InitializeComponent();
 
-            SpotifyAPI spotify = new SpotifyAPI();
+            SpotifyAPI spotifyAPI = new SpotifyAPI();
+            spotify = new SpotifyLocalAPI(new SpotifyLocalAPIConfig
+            {
+                Port = 8500,
+                HostUrl = "http://localhost"
+            });
+            if (!SpotifyLocalAPI.IsSpotifyRunning())
+            {
+                MessageBox.Show("Spotify is not running");
+                return; //Make sure the spotify client is running
+            }
+            if (!SpotifyLocalAPI.IsSpotifyWebHelperRunning())
+            {
+                MessageBox.Show("Spotify WebHelper is not running");
+                return; //Make sure the WebHelper is running
+            }
+
+            if (!spotify.Connect())
+            {
+                MessageBox.Show("Spotify is not running");
+                return; //We need to call Connect before fetching infos, this will handle Auth stuff
+            }
+
+            StatusResponse status = spotify.GetStatus(); //status contains infos
 
             mmiC = new MmiCommunication("localhost",8000, "User1", "GUI");
             mmiC.Message += MmiC_Message;

@@ -26,39 +26,44 @@
             </summary>
             <returns>true if the track is neither an advert nor a normal track, for example a podcast</returns>
         </member>
-        <member name="M:SpotifyAPI.Local.Models.Track.GetAlbumArtUrl(SpotifyAPI.Local.Enums.AlbumArtSize)">
+        <member name="M:SpotifyAPI.Local.Models.Track.GetAlbumArtUrl(SpotifyAPI.Local.Enums.AlbumArtSize,SpotifyAPI.ProxyConfig)">
             <summary>
             Returns a URL to the album cover in the provided size
             </summary>
             <param name="size">AlbumArtSize (160,320,640)</param>
+            <param name="proxyConfig">Optional proxy settings</param>
             <returns>A String, which is the URL to the Albumart</returns>
         </member>
-        <member name="M:SpotifyAPI.Local.Models.Track.GetAlbumArtAsync(SpotifyAPI.Local.Enums.AlbumArtSize)">
+        <member name="M:SpotifyAPI.Local.Models.Track.GetAlbumArtAsync(SpotifyAPI.Local.Enums.AlbumArtSize,SpotifyAPI.ProxyConfig)">
             <summary>
             Returns a Bitmap of the album cover in the provided size asynchronous
             </summary>
             <param name="size">AlbumArtSize (160,320,640)</param>
+            <param name="proxyConfig">Optional proxy settings</param>
             <returns>A Bitmap, which is the albumart</returns>
         </member>
-        <member name="M:SpotifyAPI.Local.Models.Track.GetAlbumArtAsByteArrayAsync(SpotifyAPI.Local.Enums.AlbumArtSize)">
+        <member name="M:SpotifyAPI.Local.Models.Track.GetAlbumArtAsByteArrayAsync(SpotifyAPI.Local.Enums.AlbumArtSize,SpotifyAPI.ProxyConfig)">
             <summary>
             Returns a byte[] of the the album cover in the provided size asynchronous
             </summary>
             <param name="size">AlbumArtSize (160,320,640)</param>
+            <param name="proxyConfig">Optional proxy settings</param>
             <returns>A byte[], which is the albumart in binary data</returns>
         </member>
-        <member name="M:SpotifyAPI.Local.Models.Track.GetAlbumArt(SpotifyAPI.Local.Enums.AlbumArtSize)">
+        <member name="M:SpotifyAPI.Local.Models.Track.GetAlbumArt(SpotifyAPI.Local.Enums.AlbumArtSize,SpotifyAPI.ProxyConfig)">
             <summary>
             Returns a Bitmap of the album cover in the provided size
             </summary>
             <param name="size">AlbumArtSize (160,320,640)</param>
+            <param name="proxyConfig">Optional proxy settings</param>
             <returns>A Bitmap, which is the albumart</returns>
         </member>
-        <member name="M:SpotifyAPI.Local.Models.Track.GetAlbumArtAsByteArray(SpotifyAPI.Local.Enums.AlbumArtSize)">
+        <member name="M:SpotifyAPI.Local.Models.Track.GetAlbumArtAsByteArray(SpotifyAPI.Local.Enums.AlbumArtSize,SpotifyAPI.ProxyConfig)">
             <summary>
             Returns a byte[] of the album cover in the provided size
             </summary>
             <param name="size">AlbumArtSize (160,320,640)</param>
+            <param name="proxyConfig">Optional proxy settings</param>
             <returns>A byte[], which is the albumart in binary data</returns>
         </member>
         <member name="T:SpotifyAPI.Local.TrackChangeEventArgs">
@@ -192,6 +197,29 @@
             <summary>
             Runs Spotify's WebHelper
             </summary>
+        </member>
+        <member name="P:SpotifyAPI.ProxyConfig.BypassProxyOnLocal">
+            <summary>
+            Whether to bypass the proxy server for local addresses.
+            </summary>
+        </member>
+        <member name="M:SpotifyAPI.ProxyConfig.IsValid">
+            <summary>
+            Whether both <see cref="P:SpotifyAPI.ProxyConfig.Host"/> and <see cref="P:SpotifyAPI.ProxyConfig.Port"/> have valid values.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SpotifyAPI.ProxyConfig.GetUri">
+            <summary>
+            Create a <see cref="T:System.Uri"/> from the host and port number
+            </summary>
+            <returns>A URI</returns>
+        </member>
+        <member name="M:SpotifyAPI.ProxyConfig.CreateWebProxy">
+            <summary>
+            Creates a <see cref="T:System.Net.WebProxy"/> from the proxy details of this object.
+            </summary>
+            <returns>A <see cref="T:System.Net.WebProxy"/> or <code>null</code> if the proxy details are invalid.</returns>
         </member>
         <member name="E:SpotifyAPI.Web.Auth.AutorizationCodeAuth.OnResponseReceivedEvent">
             <summary>

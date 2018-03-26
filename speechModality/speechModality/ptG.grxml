@@ -26,19 +26,16 @@
 	</rule>
 	<rule id="object">
 	  <one-of>
-		<item>quadrado<tag>out="SQUARE"</tag></item>
-		<item>círculo<tag>out="CIRCLE"</tag></item>
-		<item>triângulo<tag>out="TRIANGLE"</tag></item>
-      <item>Play</item>
-      <item>Play artist</item>
-      <item>Play band</item>
-      <item>Pause</item>
-      <item>Resume</item>
-      <item>Skip</item>
-      <item>Go back</item>
-      <item>Volume up</item>
-      <item>Volume down</item>
-      <item>Play shuffle mode</item>
+		<item>quadrado<tag>out = "SQUARE"</tag></item>
+		<item>círculo<tag>out = "CIRCLE"</tag></item>
+		<item>triângulo<tag>out = "TRIANGLE"</tag></item>
+    <item>Play</item>
+    <item>Play artist</item>
+    <item>Play band</item>
+    <item>Skip</item>
+    <item>Go back</item>
+    <item>Volume</item>
+    <item>Play shuffle mode</item>
 	  </one-of>
 	</rule>
 	<rule id="color">
