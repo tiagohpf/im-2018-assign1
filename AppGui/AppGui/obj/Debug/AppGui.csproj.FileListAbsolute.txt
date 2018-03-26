@@ -108,3 +108,4 @@ C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\MainWindo
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.g.resources
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.Properties.Resources.resources
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csproj.GenerateResource.Cache
+C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csprojResolveAssemblyReference.cache

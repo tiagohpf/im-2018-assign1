@@ -27,7 +27,7 @@ namespace AppGui
             SpotifyAPI spotifyAPI = new SpotifyAPI();
             spotify = new SpotifyLocalAPI(new SpotifyLocalAPIConfig
             {
-                Port = 8500,
+                Port = 4381,
                 HostUrl = "http://localhost"
             });
             if (!SpotifyLocalAPI.IsSpotifyRunning())
@@ -43,13 +43,14 @@ namespace AppGui
 
             if (!spotify.Connect())
             {
-                MessageBox.Show("Spotify is not running");
+                MessageBox.Show("Spotify is not connected");
                 return; //We need to call Connect before fetching infos, this will handle Auth stuff
             }
 
             StatusResponse status = spotify.GetStatus(); //status contains infos
+            //spotify.Play();
 
-            mmiC = new MmiCommunication("localhost",8000, "User1", "GUI");
+            mmiC = new MmiCommunication("localhost", 8000, "User1", "GUI");
             mmiC.Message += MmiC_Message;
             mmiC.Start();
 
@@ -65,15 +66,15 @@ namespace AppGui
             Shape _s = null;
             switch ((string)json.recognized[0].ToString())
             {
-                case "SQUARE": _s = rectangle;
+                case "PLAY":
+                    spotify.Play();
                     break;
-                case "CIRCLE": _s = circle;
-                    break;
-                case "TRIANGLE": _s = triangle;
+                case "PAUSE":
+                    spotify.Pause();
                     break;
             }
 
-            App.Current.Dispatcher.Invoke(() =>
+            /*App.Current.Dispatcher.Invoke(() =>
             {
                 switch ((string)json.recognized[1].ToString())
                 {
@@ -87,9 +88,7 @@ namespace AppGui
                         _s.Fill = Brushes.Red;
                         break;
                 }
-            });
-            
-
+            });*/
 
         }
     }
