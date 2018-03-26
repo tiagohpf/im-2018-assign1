@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using SpotifyAPI.Web;
 using System.Windows;
 
-namespace speechModality
+namespace AppGui
 {
     public class SpotifyAPI
     {

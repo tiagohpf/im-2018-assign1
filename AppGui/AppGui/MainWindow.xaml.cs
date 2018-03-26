@@ -7,6 +7,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using mmisharp;
 using Newtonsoft.Json;
+using SpotifyAPI;
 
 namespace AppGui
 {
@@ -20,6 +21,7 @@ namespace AppGui
         {
             InitializeComponent();
 
+            SpotifyAPI spotify = new SpotifyAPI();
 
             mmiC = new MmiCommunication("localhost",8000, "User1", "GUI");
             mmiC.Message += MmiC_Message;
