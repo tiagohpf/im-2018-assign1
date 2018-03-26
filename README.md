@@ -8,5 +8,5 @@ You've to install [SpotifyAPI-NET](https://github.com/JohnnyCrazy/SpotifyAPI-NET
 You can install the packages from Visual Studio in Tools tab and then NuGet Package Manager Console by using the following command:
 
 ```
-Install-Package SpotifyAPI-NET -Version 2.17.1
+Install-Package SpotifyAPI-NET -Version 2.18.0
 ```
