@@ -11,6 +11,13 @@
     <one-of>
       <item>Play<tag>out = "PLAY"</tag></item>
       <item>Pause<tag>out = "PAUSE"</tag></item>
+      <item>Skip<tag>out = "SKIP"</tag></item>
+      <item>Go back<tag>out = "BACK"</tag></item>
+      <item>Volume down<tag>out = "VDOWN"</tag></item>
+      <item>Volume up<tag>out = "VUP"</tag></item> 
+      <item>Mute<tag>out = "MUTE"</tag></item>
+      <item>Unmute<tag>out = "UNMUTE"</tag></item>
+    
     </one-of>
   </rule>
 

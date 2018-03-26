@@ -72,6 +72,34 @@ namespace AppGui
                 case "PAUSE":
                     spotify.Pause();
                     break;
+                case "SKIP":
+                    spotify.Skip();
+                    break;
+                case "BACK":
+                    spotify.Previous();
+                    break;
+                case "VDOWN":
+                    float volume_down = spotify.GetSpotifyVolume();
+                    if(volume_down > 0)
+                    {
+                        spotify.SetSpotifyVolume(volume_down - 50);
+                    }
+                    break;
+                case "VUP":
+                    float volume_up = spotify.GetSpotifyVolume();
+                    if(volume_up < 100)
+                    {
+                        spotify.SetSpotifyVolume(volume_up + 50);
+                    }
+                    break;
+                case "MUTE":
+                    if(!spotify.IsSpotifyMuted())
+                        spotify.Mute();
+                    break;
+                case "UNMUTE":
+                    if (spotify.IsSpotifyMuted())
+                        spotify.UnMute();
+                    break;
             }
 
             /*App.Current.Dispatcher.Invoke(() =>
