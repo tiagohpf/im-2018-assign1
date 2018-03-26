@@ -3,13 +3,25 @@
 	<rule id="rootRule" scope="public">
 	  <item>
 		  <item>
-			<ruleref uri="#object"/>
-			<tag>out.shape=rules.latest();</tag>
+			  <ruleref uri="#object"/>
+			  <tag>out.shape = rules.latest();</tag>
 		  </item>
 		  <item>
-			<ruleref uri="#color"/>
-			<tag>out.color=rules.latest();</tag>
+			  <ruleref uri="#color"/>
+			  <tag>out.color = rules.latest();</tag>
 		  </item>
+      <item>
+        <ruleref uri="#resume"/>
+        <tag>out.resume;</tag>
+      </item>
+      <item>
+        <ruleref uri="#pause"/>
+        <tag>out.pause;</tag>
+      </item>
+      <item>
+        <ruleref uri="#volume"/>
+        <tag>out.volume = rules.latest();</tag>
+      </item>
 	  </item>
 	</rule>
 	<rule id="object">
@@ -34,6 +46,18 @@
 		<item>verde<tag>out="GREEN"</tag></item>
 		<item>azul<tag>out="BLUE"</tag></item>
 		<item>vermelho<tag>out="RED"</tag></item>
+	  </one-of>
+	</rule>
+  <rule id="resume">
+    <item>Resume<tag>out = "RESUME"</tag></item>
+  </rule>
+  <rule id="pause">
+    <item>Pause<tag>out = "PAUSE"</tag></item>
+  </rule>
+  <rule id="volume">
+	  <one-of>
+		<item>Up<tag>out = "UP"</tag></item>
+		<item>Down<tag>out = "DOWN"</tag></item>
 	  </one-of>
 	</rule>
 </grammar>
