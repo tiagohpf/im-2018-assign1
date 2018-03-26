@@ -12,7 +12,7 @@ Install-Package SpotifyAPI-NET -Version 2.18.0
 ```
 ### Login
 
-To enter in Spotify, you've the use the following credentials:
+To enter in Spotify, you've to use the following credentials:
 
 **E-mail:** d1533276@nwytg.com <br>
 **Password:** IM20172018
