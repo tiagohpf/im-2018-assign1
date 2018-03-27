@@ -10,6 +10,10 @@ using Newtonsoft.Json;
 using SpotifyAPI.Local; //Base Namespace
 using SpotifyAPI.Local.Enums; //Enums
 using SpotifyAPI.Local.Models; //Models for the JSON-responses
+using SpotifyAPI.Web.Enums;
+using SpotifyAPI.Web.Models;
+using SpotifyAPI.Web;
+using System.Collections.Generic;
 
 namespace AppGui
 {
@@ -20,11 +24,14 @@ namespace AppGui
     {
         private MmiCommunication mmiC;
         private static SpotifyLocalAPI spotify;
+        private SpotifyWebAPI webSpotify;
         public MainWindow()
         {
             InitializeComponent();
 
             SpotifyAPI spotifyAPI = new SpotifyAPI();
+            webSpotify = spotifyAPI.getAPI();
+
             spotify = new SpotifyLocalAPI(new SpotifyLocalAPIConfig
             {
                 Port = 4381,
@@ -48,12 +55,10 @@ namespace AppGui
             }
 
             StatusResponse status = spotify.GetStatus(); //status contains infos
-            //spotify.Play();
 
             mmiC = new MmiCommunication("localhost", 8000, "User1", "GUI");
             mmiC.Message += MmiC_Message;
             mmiC.Start();
-
         }
 
         private void MmiC_Message(object sender, MmiEventArgs e)
@@ -62,8 +67,7 @@ namespace AppGui
             var doc = XDocument.Parse(e.Message);
             var com = doc.Descendants("command").FirstOrDefault().Value;
             dynamic json = JsonConvert.DeserializeObject(com);
-
-            Shape _s = null;
+            float volume = spotify.GetSpotifyVolume();
             switch ((string)json.recognized[0].ToString())
             {
                 case "PLAY":
@@ -79,18 +83,12 @@ namespace AppGui
                     spotify.Previous();
                     break;
                 case "VDOWN":
-                    float volume_down = spotify.GetSpotifyVolume();
-                    if(volume_down > 0)
-                    {
-                        spotify.SetSpotifyVolume(volume_down - 50);
-                    }
+                    if(volume > 0)
+                        spotify.SetSpotifyVolume(volume - 25);
                     break;
                 case "VUP":
-                    float volume_up = spotify.GetSpotifyVolume();
-                    if(volume_up < 100)
-                    {
-                        spotify.SetSpotifyVolume(volume_up + 50);
-                    }
+                    if(volume < 100)
+                        spotify.SetSpotifyVolume(volume + 25);
                     break;
                 case "MUTE":
                     if(!spotify.IsSpotifyMuted())
@@ -102,18 +100,14 @@ namespace AppGui
                     break;
             }
 
+            SearchItem item = webSpotify.SearchItems("Queen", SearchType.Artist);
+            FullArtist artists = item.Artists.Items[0];
+            //MessageBox.Show((string)json.recognized[1]);
             /*App.Current.Dispatcher.Invoke(() =>
             {
                 switch ((string)json.recognized[1].ToString())
                 {
-                    case "GREEN":
-                        _s.Fill = Brushes.Green;
-                        break;
-                    case "BLUE":
-                        _s.Fill = Brushes.Blue;
-                        break;
-                    case "RED":
-                        _s.Fill = Brushes.Red;
+                    case "QUEEN":
                         break;
                 }
             });*/

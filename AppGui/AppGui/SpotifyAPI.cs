@@ -41,5 +41,10 @@ namespace AppGui
             if (_spotify == null)
                 return;
         }
+
+        public SpotifyWebAPI getAPI()
+        {
+            return _spotify;
+        }
     }
 }

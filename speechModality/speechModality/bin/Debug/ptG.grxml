@@ -1,23 +1,67 @@
 ﻿<?xml version="1.0"?>
 <grammar xml:lang="en-US" version="1.0" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
   <rule id="rootRule" scope="public">
-    <item>
-      <ruleref uri="#command"/>
-      <tag>out.command = rules.latest();</tag>
-    </item>
+    <one-of>
+      <item>
+        <ruleref uri="#command"/>
+        <tag>out.command = rules.latest();</tag>
+      </item>
+      <item>
+        <ruleref uri="#execute"/>
+        <tag>out.execute = rules.latest();</tag>
+      </item>
+    </one-of>
   </rule>
 
   <rule id="command">
     <one-of>
+      <item>
+        PLAY<tag>out = "PLAY"</tag>
+      </item>
+      <item>
+        Pause<tag>out = "PAUSE"</tag>
+      </item>
+      <item>
+        Skip<tag>out = "SKIP"</tag>
+      </item>
+      <item>
+        Go Back<tag>out = "BACK"</tag>
+      </item>
+      <item>
+        Volume Down<tag>out = "VDOWN"</tag>
+      </item>
+      <item>
+        Volume Up<tag>out = "VUP"</tag>
+      </item>
+      <item>
+        Mute<tag>out = "MUTE"</tag>
+      </item>
+      <item>
+        Unmute<tag>out = "UNMUTE"</tag>
+      </item>
+    </one-of>
+  </rule>
+
+
+  <rule id = "execute">
+    <item>
       <item>Play<tag>out = "PLAY"</tag></item>
-      <item>Pause<tag>out = "PAUSE"</tag></item>
-      <item>Skip<tag>out = "SKIP"</tag></item>
-      <item>Go back<tag>out = "BACK"</tag></item>
-      <item>Volume down<tag>out = "VDOWN"</tag></item>
-      <item>Volume up<tag>out = "VUP"</tag></item> 
-      <item>Mute<tag>out = "MUTE"</tag></item>
-      <item>Unmute<tag>out = "UNMUTE"</tag></item>
-    
+      <item>
+        <ruleref uri="#bands"/>
+        <tag>out.bands = rules.latest();</tag>
+      </item>
+    </item>
+  </rule>
+
+
+  <rule id = "bands">
+    <one-of>
+      <item>
+        Queen<tag>out = "QUEEN"</tag>
+      </item>
+      <item>
+        Simple Minds<tag>out = "SMINDS"</tag>
+      </item>
     </one-of>
   </rule>
 
