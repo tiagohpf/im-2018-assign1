@@ -100,17 +100,23 @@ namespace AppGui
                     break;
             }
 
-            SearchItem item = webSpotify.SearchItems("Queen", SearchType.Artist);
-            FullArtist artists = item.Artists.Items[0];
+            SearchItem item;
+            //FullArtist artists = item.Artists.Items[0];
             //MessageBox.Show((string)json.recognized[1]);
-            /*App.Current.Dispatcher.Invoke(() =>
+            App.Current.Dispatcher.Invoke(() =>
             {
                 switch ((string)json.recognized[1].ToString())
                 {
                     case "QUEEN":
+                        item = webSpotify.SearchItems("Queen", SearchType.Artist);
+                        spotify.PlayURL(item.Artists.Items[0].Uri);
+                        break;
+                    case "BASTILLE":
+                        item = webSpotify.SearchItems("Bastille", SearchType.Artist);
+                        spotify.PlayURL(item.Artists.Items[0].Uri);
                         break;
                 }
-            });*/
+            });
 
         }
     }

@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0"?>
 <grammar xml:lang="en-US" version="1.0" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
   <rule id="rootRule" scope="public">
-    <one-of>
       <item>
-        <ruleref uri="#command"/>
-        <tag>out.command = rules.latest();</tag>
+        <item>
+          <ruleref uri="#command"/>
+          <tag>out.command = rules.latest();</tag>
+        </item>
+        <item>
+          <ruleref uri="#artist"/>
+          <tag>out.artist=rules.latest();</tag>
       </item>
-      <item>
-        <ruleref uri="#execute"/>
-        <tag>out.execute = rules.latest();</tag>
-      </item>
-    </one-of>
+        </item>
   </rule>
 
   <rule id="command">
     <one-of>
       <item>
-        PLAY<tag>out = "PLAY"</tag>
+        Play<tag>out = "PLAY"</tag>
       </item>
       <item>
         Pause<tag>out = "PAUSE"</tag>
@@ -36,33 +36,16 @@
       <item>
         Mute<tag>out = "MUTE"</tag>
       </item>
-      <item>
-        Unmute<tag>out = "UNMUTE"</tag>
-      </item>
+      <item>Unmute<tag>out = "UNMUTE"</tag></item>
     </one-of>
   </rule>
-
-
-  <rule id = "execute">
-    <item>
-      <item>Play<tag>out = "PLAY"</tag></item>
-      <item>
-        <ruleref uri="#bands"/>
-        <tag>out.bands = rules.latest();</tag>
-      </item>
-    </item>
-  </rule>
-
-
-  <rule id = "bands">
-    <one-of>
-      <item>
-        Queen<tag>out = "QUEEN"</tag>
-      </item>
-      <item>
-        Simple Minds<tag>out = "SMINDS"</tag>
-      </item>
-    </one-of>
-  </rule>
-
+    <rule id="artist">
+      <one-of>
+        <item>
+          <tag>out="EMP"</tag>
+        </item>
+        <item>Queen<tag>out="QUEEN"</tag></item>
+        <item>Bastille<tag>out="BASTILLE"</tag></item>
+      </one-of>
+    </rule>
 </grammar>

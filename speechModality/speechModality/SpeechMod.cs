@@ -65,12 +65,11 @@ namespace speechModality
             string json = "{ \"recognized\": [";
             foreach (var resultSemantic in e.Result.Semantics)
             {
-                MessageBox.Show(resultSemantic.Value.Value.ToString());
                 json+= "\"" + resultSemantic.Value.Value +"\", ";
             }
             json = json.Substring(0, json.Length - 2);
             json += "] }";
-
+            //MessageBox.Show((string)json.ToString());
             var exNot = lce.ExtensionNotification(e.Result.Audio.StartTime+"", e.Result.Audio.StartTime.Add(e.Result.Audio.Duration)+"",e.Result.Confidence, json);
             mmic.Send(exNot);
         }
