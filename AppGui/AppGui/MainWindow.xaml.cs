@@ -68,6 +68,7 @@ namespace AppGui
             var com = doc.Descendants("command").FirstOrDefault().Value;
             dynamic json = JsonConvert.DeserializeObject(com);
             float volume = spotify.GetSpotifyVolume();
+            SearchItem item;
             switch ((string)json.recognized[0].ToString())
             {
                 case "PLAY":
@@ -83,12 +84,16 @@ namespace AppGui
                     spotify.Previous();
                     break;
                 case "VDOWN":
-                    if(volume > 0)
+                    if (volume - 25 >= 0)
                         spotify.SetSpotifyVolume(volume - 25);
+                    else
+                        spotify.SetSpotifyVolume(0);
                     break;
                 case "VUP":
-                    if(volume < 100)
+                    if (volume + 25 <= 100)
                         spotify.SetSpotifyVolume(volume + 25);
+                    else
+                        spotify.SetSpotifyVolume(100);
                     break;
                 case "MUTE":
                     if(!spotify.IsSpotifyMuted())
@@ -98,26 +103,37 @@ namespace AppGui
                     if (spotify.IsSpotifyMuted())
                         spotify.UnMute();
                     break;
+                case "PLAYLIST":
+                    String playlist = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Uri;
+                    spotify.PlayURL(playlist);
+                    break;
+                
+                case "ADD":
+                    String add = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Id;
+                    ErrorResponse x = webSpotify.AddPlaylistTrack("4lzrg4ac5nyj1f5bosl1pse1i", add, spotify.GetStatus().Track.TrackResource.Uri);
+                    //MessageBox.Show(x.Error.Message);
+                    break;
             }
 
-            SearchItem item;
             //FullArtist artists = item.Artists.Items[0];
             //MessageBox.Show((string)json.recognized[1]);
-            App.Current.Dispatcher.Invoke(() =>
+            if ((string)json.recognized[0].ToString() == "PLAY")
             {
-                switch ((string)json.recognized[1].ToString())
+                App.Current.Dispatcher.Invoke(() =>
                 {
-                    case "QUEEN":
-                        item = webSpotify.SearchItems("Queen", SearchType.Artist);
-                        spotify.PlayURL(item.Artists.Items[0].Uri);
-                        break;
-                    case "BASTILLE":
-                        item = webSpotify.SearchItems("Bastille", SearchType.Artist);
-                        spotify.PlayURL(item.Artists.Items[0].Uri);
-                        break;
-                }
-            });
-
+                    switch ((string)json.recognized[1].ToString())
+                    {
+                        case "QUEEN":
+                            item = webSpotify.SearchItems("Queen", SearchType.Artist);
+                            spotify.PlayURL(item.Artists.Items[0].Uri);
+                            break;
+                        case "BASTILLE":
+                            item = webSpotify.SearchItems("Bastille", SearchType.Artist);
+                            spotify.PlayURL(item.Artists.Items[0].Uri);
+                            break;
+                    }
+                });
+            }
         }
     }
 }

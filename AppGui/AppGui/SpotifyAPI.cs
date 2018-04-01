@@ -23,7 +23,8 @@ namespace AppGui
                  "http://localhost",
                  8500,
                  "826dee0fe8264cd58a31afda79f2128e",
-                 Scope.UserReadPrivate,
+                 //Scope.UserReadPrivate,
+                 Scope.PlaylistModifyPublic,
                  TimeSpan.FromSeconds(20)
             );
 

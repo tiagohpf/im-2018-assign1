@@ -19,6 +19,9 @@
         Play<tag>out = "PLAY"</tag>
       </item>
       <item>
+        Play Playlist<tag>out = "PLAYLIST"</tag>
+      </item>
+      <item>
         Pause<tag>out = "PAUSE"</tag>
       </item>
       <item>
@@ -37,6 +40,7 @@
         Mute<tag>out = "MUTE"</tag>
       </item>
       <item>Unmute<tag>out = "UNMUTE"</tag></item>
+    <item>Add to playlist<tag>out = "ADD"</tag></item>
     </one-of>
   </rule>
     <rule id="artist">
