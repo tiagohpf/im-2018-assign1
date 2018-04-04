@@ -109,9 +109,18 @@ namespace AppGui
                     break;
                 
                 case "ADD":
-                    String add = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Id;
-                    ErrorResponse x = webSpotify.AddPlaylistTrack("4lzrg4ac5nyj1f5bosl1pse1i", add, spotify.GetStatus().Track.TrackResource.Uri);
-                    //MessageBox.Show(x.Error.Message);
+                    String playlist1 = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Id;
+                    Paging<PlaylistTrack> p = webSpotify.GetPlaylistTracks("4lzrg4ac5nyj1f5bosl1pse1i", playlist1);
+                    for (var i = 0; i < p.Items.Count; i++)
+                    {
+                        if (p.Items[i].Track.Name.Equals(spotify.GetStatus().Track.TrackResource.Name))
+                        {
+                            MessageBox.Show("Music already in playlist");
+                            return;
+                        }
+                    }
+
+                    ErrorResponse x = webSpotify.AddPlaylistTrack("4lzrg4ac5nyj1f5bosl1pse1i", playlist1, spotify.GetStatus().Track.TrackResource.Uri);
                     break;
             }
 

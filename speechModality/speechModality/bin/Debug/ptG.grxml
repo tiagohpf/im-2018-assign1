@@ -19,22 +19,40 @@
         Play<tag>out = "PLAY"</tag>
       </item>
       <item>
+        Start<tag>out = "PLAY"</tag>
+      </item>
+      <item>
         Play Playlist<tag>out = "PLAYLIST"</tag>
       </item>
       <item>
         Pause<tag>out = "PAUSE"</tag>
       </item>
       <item>
+        Stop<tag>out = "PAUSE"</tag>
+      </item>
+      <item>
         Skip<tag>out = "SKIP"</tag>
+      </item>
+      <item>
+        Next<tag>out = "SKIP"</tag>
       </item>
       <item>
         Go Back<tag>out = "BACK"</tag>
       </item>
       <item>
+        Back<tag>out = "BACK"</tag>
+      </item>
+      <item>
         Volume Down<tag>out = "VDOWN"</tag>
       </item>
       <item>
+        Less volume<tag>out = "VDOWN"</tag>
+      </item>
+      <item>
         Volume Up<tag>out = "VUP"</tag>
+      </item>
+      <item>
+        More volume<tag>out = "VUP"</tag>
       </item>
       <item>
         Mute<tag>out = "MUTE"</tag>
