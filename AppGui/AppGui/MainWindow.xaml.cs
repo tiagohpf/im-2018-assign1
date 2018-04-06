@@ -30,9 +30,10 @@ namespace AppGui
         {
             InitializeComponent();
 
+            Tts t = new Tts();
+            t.Speak("Wait a few seconds, we are just getting everything ready for you!");
             SpotifyAPI spotifyAPI = new SpotifyAPI();
             webSpotify = spotifyAPI.getAPI();
-
             spotify = new SpotifyLocalAPI(new SpotifyLocalAPIConfig
             {
                 Port = 4381,
@@ -40,23 +41,26 @@ namespace AppGui
             });
             if (!SpotifyLocalAPI.IsSpotifyRunning())
             {
-                MessageBox.Show("Spotify is not running");
+                //MessageBox.Show("Spotify is not running");
+                t.Speak("Spotify is not running, can you please turn it on ?");
                 return; //Make sure the spotify client is running
             }
             if (!SpotifyLocalAPI.IsSpotifyWebHelperRunning())
             {
-                MessageBox.Show("Spotify WebHelper is not running");
+                //MessageBox.Show("Spotify WebHelper is not running");
+                t.Speak("Spotify WebHelper is not running");
                 return; //Make sure the WebHelper is running
             }
 
             if (!spotify.Connect())
             {
-                MessageBox.Show("Spotify is not connected");
+                //MessageBox.Show("Spotify is not connected");
+                t.Speak("Spotify is not connected.");
                 return; //We need to call Connect before fetching infos, this will handle Auth stuff
             }
 
             StatusResponse status = spotify.GetStatus(); //status contains infos
-
+            t.Speak("You can close the browser now, hope you have a good time with our application");
             mmiC = new MmiCommunication("localhost", 8000, "User1", "GUI");
             mmiC.Message += MmiC_Message;
             mmiC.Start();
@@ -77,8 +81,8 @@ namespace AppGui
             String from = (string)json.recognized[6].ToString();
             String year = (string)json.recognized[7].ToString();
             SearchItem item;
-            float volume;
             Tts t = new Tts();
+            float volume;
 
             // Using just a normal command
             switch (command)
