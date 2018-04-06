@@ -14,6 +14,7 @@ using SpotifyAPI.Web.Enums;
 using SpotifyAPI.Web.Models;
 using SpotifyAPI.Web;
 using System.Collections.Generic;
+using multimodal;
 
 namespace AppGui
 {
@@ -77,6 +78,7 @@ namespace AppGui
             String year = (string)json.recognized[7].ToString();
             SearchItem item;
             float volume;
+            Tts t = new Tts();
 
             // Using just a normal command
             switch (command)
@@ -198,7 +200,9 @@ namespace AppGui
                         }
                         else
                         {
-                            MessageBox.Show("Command not supported");
+                            //strange days from 1967
+                            //MessageBox.Show("Command not supported");
+                            t.Speak("I am very sorry but this command is not supported");
                         }
                     }
                 });
