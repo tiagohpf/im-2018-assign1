@@ -11,6 +11,10 @@
         <tag>out.album = rules.latest();</tag>
       </item>
       <item>
+        <ruleref uri="#song_1"/>
+        <tag>out.song_1 = rules.latest();</tag>
+      </item>
+      <item>
         <ruleref uri="#by"/>
         <tag>out.by = rules.latest();</tag>
       </item>
@@ -19,8 +23,8 @@
         <tag>out.artist = rules.latest();</tag>
       </item>
       <item>
-        <ruleref uri="#song"/>
-        <tag>out.song = rules.latest();</tag>
+        <ruleref uri="#song_2"/>
+        <tag>out.song_2 = rules.latest();</tag>
       </item>
       <item>
         <ruleref uri="#from"/>
@@ -104,7 +108,16 @@
     </one-of>
   </rule>
 
-  <rule id="song">
+  <rule id="song_1">
+    <one-of>
+      <item>
+        <tag>out = "EMP"</tag>
+      </item>
+      <item>Paradise City</item>
+    </one-of>
+  </rule>
+  
+  <rule id="song_2">
     <one-of>
       <item>
         <tag>out = "EMP"</tag>

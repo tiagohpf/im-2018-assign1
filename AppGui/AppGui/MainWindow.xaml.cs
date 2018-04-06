@@ -69,11 +69,12 @@ namespace AppGui
             dynamic json = JsonConvert.DeserializeObject(com);
             String command = (string)json.recognized[0].ToString();
             String album = (string)json.recognized[1].ToString();
-            String by = (string)json.recognized[2].ToString();
-            String artist = (string)json.recognized[3].ToString();
-            String song = (string)json.recognized[4].ToString();
-            String from = (string)json.recognized[5].ToString();
-            String year = (string)json.recognized[6].ToString();
+            String song_1 = (string)json.recognized[2].ToString();
+            String by = (string)json.recognized[3].ToString();
+            String artist = (string)json.recognized[4].ToString();
+            String song_2 = (string)json.recognized[5].ToString();
+            String from = (string)json.recognized[6].ToString();
+            String year = (string)json.recognized[7].ToString();
             SearchItem item;
             float volume;
 
@@ -139,12 +140,22 @@ namespace AppGui
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
-                    // I wanna listen {album} by {artist}
                     if (by == "BY")
                     {
-                        String query = album + "+" + artist;
-                        item = webSpotify.SearchItems(query, SearchType.Album);
-                        spotify.PlayURL(item.Albums.Items[0].Uri);
+                        // I wanna listen {album} by {artist}
+                        if (album != "EMP" && song_1 == "EMP")
+                        {
+                            String query = album + "+" + artist;
+                            item = webSpotify.SearchItems(query, SearchType.Album);
+                            spotify.PlayURL(item.Albums.Items[0].Uri);
+                        }
+                        // I wanna listen {song} by {artist}
+                        else if (song_1 != "EMP" && album == "EMP")
+                        {
+                            String query = song_1 + "+" + artist;
+                            item = webSpotify.SearchItems(query, SearchType.Track);
+                            spotify.PlayURL(item.Tracks.Items[0].Uri);
+                        }
                     }
                     else {
                         // I wanna listen {artist}
@@ -176,8 +187,8 @@ namespace AppGui
                             }
                         }
                         // I wanna listen {song}
-                        else if (song != "EMP") {
-                            item = webSpotify.SearchItems(song, SearchType.Track);
+                        else if (artist == "EMP" && song_2 != "EMP") {
+                            item = webSpotify.SearchItems(song_2, SearchType.Track);
                             spotify.PlayURL(item.Tracks.Items[0].Uri);
                         }
                     }
