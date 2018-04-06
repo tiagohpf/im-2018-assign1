@@ -128,3 +128,4 @@ C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.cs
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.exe
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.pdb
 C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\Microsoft.Speech.dll
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csprojResolveAssemblyReference.cache

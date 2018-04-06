@@ -193,9 +193,10 @@ namespace AppGui
                                 if (album_date[0] == year)
                                 {
                                     spotify.PlayURL(simple_album.Uri);
-                                    break;
+                                    return;
                                 }
                             }
+                            t.Speak("There is no album from that artist on that year");
                         }
                         // I wanna listen {song}
                         else if (artist == "EMP" && song_2 != "EMP") {
