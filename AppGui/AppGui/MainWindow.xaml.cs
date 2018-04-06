@@ -67,9 +67,18 @@ namespace AppGui
             var doc = XDocument.Parse(e.Message);
             var com = doc.Descendants("command").FirstOrDefault().Value;
             dynamic json = JsonConvert.DeserializeObject(com);
-            float volume = spotify.GetSpotifyVolume();
+            String command = (string)json.recognized[0].ToString();
+            String album = (string)json.recognized[1].ToString();
+            String by = (string)json.recognized[2].ToString();
+            String artist = (string)json.recognized[3].ToString();
+            String song = (string)json.recognized[4].ToString();
+            String from = (string)json.recognized[5].ToString();
+            String year = (string)json.recognized[6].ToString();
             SearchItem item;
-            switch ((string)json.recognized[0].ToString())
+            float volume;
+
+            // Using just a normal command
+            switch (command)
             {
                 case "PLAY":
                     spotify.Play();
@@ -84,19 +93,21 @@ namespace AppGui
                     spotify.Previous();
                     break;
                 case "VDOWN":
+                    volume = spotify.GetSpotifyVolume();
                     if (volume - 25 >= 0)
                         spotify.SetSpotifyVolume(volume - 25);
                     else
                         spotify.SetSpotifyVolume(0);
                     break;
                 case "VUP":
+                    volume = spotify.GetSpotifyVolume();
                     if (volume + 25 <= 100)
                         spotify.SetSpotifyVolume(volume + 25);
                     else
                         spotify.SetSpotifyVolume(100);
                     break;
                 case "MUTE":
-                    if(!spotify.IsSpotifyMuted())
+                    if (!spotify.IsSpotifyMuted())
                         spotify.Mute();
                     break;
                 case "UNMUTE":
@@ -107,7 +118,7 @@ namespace AppGui
                     String playlist = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Uri;
                     spotify.PlayURL(playlist);
                     break;
-                
+
                 case "ADD":
                     String playlist1 = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Id;
                     Paging<PlaylistTrack> p = webSpotify.GetPlaylistTracks("4lzrg4ac5nyj1f5bosl1pse1i", playlist1);
@@ -124,22 +135,51 @@ namespace AppGui
                     break;
             }
 
-            //FullArtist artists = item.Artists.Items[0];
-            //MessageBox.Show((string)json.recognized[1]);
-            if ((string)json.recognized[0].ToString() == "PLAY")
+            if (command == "LISTEN")
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
-                    switch ((string)json.recognized[1].ToString())
+                    // I wanna listen {album} by {artist}
+                    if (by == "BY")
                     {
-                        case "QUEEN":
-                            item = webSpotify.SearchItems("Queen", SearchType.Artist);
-                            spotify.PlayURL(item.Artists.Items[0].Uri);
-                            break;
-                        case "BASTILLE":
-                            item = webSpotify.SearchItems("Bastille", SearchType.Artist);
-                            spotify.PlayURL(item.Artists.Items[0].Uri);
-                            break;
+                        String query = album + "+" + artist;
+                        item = webSpotify.SearchItems(query, SearchType.Album);
+                        spotify.PlayURL(item.Albums.Items[0].Uri);
+                    }
+                    else {
+                        // I wanna listen {artist}
+                        if (artist != "EMP" && from == "EMP")
+                        {
+                            switch (artist)
+                            {
+                                case "SOMETHING":
+                                    spotify.Play();
+                                    break;
+                                default:
+                                    item = webSpotify.SearchItems(artist, SearchType.Artist);
+                                    spotify.PlayURL(item.Artists.Items[0].Uri);
+                                    break;
+                            }
+                        }
+                        // I wanna listen {artist} from {year}
+                        else if(artist != "EMP" && from != "EMP")
+                        {
+                            item = webSpotify.SearchItems(artist, SearchType.Artist | SearchType.Album);
+                            foreach (SimpleAlbum simple_album in item.Albums.Items)
+                            {
+                                String [] album_date = simple_album.ReleaseDate.Split('-');
+                                if (album_date[0] == year)
+                                {
+                                    spotify.PlayURL(simple_album.Uri);
+                                    break;
+                                }
+                            }
+                        }
+                        // I wanna listen {song}
+                        else if (song != "EMP") {
+                            item = webSpotify.SearchItems(song, SearchType.Track);
+                            spotify.PlayURL(item.Tracks.Items[0].Uri);
+                        }
                     }
                 });
             }

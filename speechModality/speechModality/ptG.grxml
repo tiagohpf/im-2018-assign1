@@ -1,73 +1,158 @@
 ﻿<?xml version="1.0"?>
 <grammar xml:lang="en-US" version="1.0" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
   <rule id="rootRule" scope="public">
+    <item>
       <item>
-        <item>
-          <ruleref uri="#command"/>
-          <tag>out.command = rules.latest();</tag>
-        </item>
-        <item>
-          <ruleref uri="#artist"/>
-          <tag>out.artist=rules.latest();</tag>
+        <ruleref uri="#command"/>
+        <tag>out.command = rules.latest();</tag>
       </item>
-        </item>
+      <item>
+        <ruleref uri="#album"/>
+        <tag>out.album = rules.latest();</tag>
+      </item>
+      <item>
+        <ruleref uri="#by"/>
+        <tag>out.by = rules.latest();</tag>
+      </item>
+      <item>
+        <ruleref uri="#artist"/>
+        <tag>out.artist = rules.latest();</tag>
+      </item>
+      <item>
+        <ruleref uri="#song"/>
+        <tag>out.song = rules.latest();</tag>
+      </item>
+      <item>
+        <ruleref uri="#from"/>
+        <tag>out.from = rules.latest();</tag>
+      </item>
+      <item>
+        <ruleref uri="#year"/>
+        <tag>out.year = rules.latest();</tag>
+      </item>
+    </item>
+
   </rule>
 
   <rule id="command">
     <one-of>
       <item>
-        Play<tag>out = "PLAY"</tag>
+        I wanna listen<tag>out = "LISTEN"</tag>
       </item>
       <item>
-        Start<tag>out = "PLAY"</tag>
+        I wanna back to music playback<tag>out = "PLAY"</tag>
+      </item>
+
+      <item>
+        Stop the music<tag>out = "PAUSE"</tag>
       </item>
       <item>
-        Play Playlist<tag>out = "PLAYLIST"</tag>
+        Pause the music<tag>out = "PAUSE"</tag>
+      </item>
+
+      <item>
+        Change to another one<tag>out = "SKIP"</tag>
       </item>
       <item>
-        Pause<tag>out = "PAUSE"</tag>
+        I hate this music<tag>out = "SKIP"</tag>
+      </item>
+
+      <item>
+        I wanna listen the previous song<tag>out = "BACK"</tag>
       </item>
       <item>
-        Stop<tag>out = "PAUSE"</tag>
+        I liked the previous song<tag>out = "BACK"</tag>
       </item>
       <item>
-        Skip<tag>out = "SKIP"</tag>
+        I wanna repeat the previous song<tag>out = "BACK"</tag>
+      </item>
+
+      <item>
+        Turn up the volume<tag>out = "VUP"</tag>
       </item>
       <item>
-        Next<tag>out = "SKIP"</tag>
+        That's to quiet!<tag>out = "VUP"</tag>
+      </item>
+
+      <item>
+        Turn down the volume<tag>out = "VDOWN"</tag>
       </item>
       <item>
-        Go Back<tag>out = "BACK"</tag>
+        That's to loud!<tag>out = "VDOWN"</tag>
       </item>
-      <item>
-        Back<tag>out = "BACK"</tag>
-      </item>
-      <item>
-        Volume Down<tag>out = "VDOWN"</tag>
-      </item>
-      <item>
-        Less volume<tag>out = "VDOWN"</tag>
-      </item>
-      <item>
-        Volume Up<tag>out = "VUP"</tag>
-      </item>
-      <item>
-        More volume<tag>out = "VUP"</tag>
-      </item>
+
       <item>
         Mute<tag>out = "MUTE"</tag>
       </item>
-      <item>Unmute<tag>out = "UNMUTE"</tag></item>
-    <item>Add to playlist<tag>out = "ADD"</tag></item>
+      <item>
+        Unmute<tag>out = "UNMUTE"</tag>
+      </item>
     </one-of>
   </rule>
-    <rule id="artist">
-      <one-of>
-        <item>
-          <tag>out="EMP"</tag>
-        </item>
-        <item>Queen<tag>out="QUEEN"</tag></item>
-        <item>Bastille<tag>out="BASTILLE"</tag></item>
-      </one-of>
-    </rule>
+
+  <rule id="artist">
+    <one-of>
+      <item>
+        <tag>out = "EMP"</tag>
+      </item>
+      <item>
+        something<tag>out = "SOMETHING"</tag>
+      </item>
+      <item>Queen</item>
+      <item>Bastille</item>
+      <item>Guns N' Roses</item>
+    </one-of>
+  </rule>
+
+  <rule id="song">
+    <one-of>
+      <item>
+        <tag>out = "EMP"</tag>
+      </item>
+      <item>Paradise City</item>
+    </one-of>
+  </rule>
+
+  <rule id="album">
+    <one-of>
+      <item>
+        <tag>out = "EMP"</tag>
+      </item>
+      <item>Appetite For Destruction</item>
+    </one-of>
+  </rule>
+
+  <rule id="year">
+    <one-of>
+      <item>
+        <tag>out = "EMP"</tag>
+      </item>
+      <item>1987</item>
+      <item>1991</item>
+      <item>2008</item>
+      <item>2016</item>
+    </one-of>
+  </rule>
+
+  <rule id="by">
+    <one-of>
+      <item>
+        <tag>out = "EMP"</tag>
+      </item>
+      <item>
+        by <tag>out = "BY" </tag>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="from">
+    <one-of>
+      <item>
+        <tag>out = "EMP"</tag>
+      </item>
+      <item>
+        from <tag>out = "FROM" </tag>
+      </item>
+    </one-of>
+  </rule>
 </grammar>
