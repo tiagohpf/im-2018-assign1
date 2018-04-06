@@ -41,10 +41,31 @@
   <rule id="command">
     <one-of>
       <item>
-        I wanna listen<tag>out = "LISTEN"</tag>
+        Add the current song to my playlist<tag>out = "ADD"</tag>
       </item>
       <item>
-        I wanna back to music playback<tag>out = "PLAY"</tag>
+        I like this song <tag>out = "ADD"</tag>
+      </item>
+      <item>
+        Add this song to my playlist<tag>out = "ADD"</tag>
+      </item>
+      <item>
+        Add this to my playlist<tag>out = "ADD"</tag>
+      </item>
+      <item>
+        I wanna listen to<tag>out = "LISTEN"</tag>
+      </item>
+      <item>
+        I want to listen to <tag>out = "LISTEN"</tag>
+      </item>
+      <item>
+        Just play<tag>out = "PLAY"</tag>
+      </item>
+      <item>
+        Continue<tag>out = "PLAY"</tag>
+      </item>
+      <item>
+        Keep playing <tag> out = "PLAY"</tag>
       </item>
 
       <item>
@@ -53,6 +74,9 @@
       <item>
         Pause the music<tag>out = "PAUSE"</tag>
       </item>
+      <item>
+        Cut the music<tag>out = "PAUSE"</tag>
+      </item>
 
       <item>
         Change to another one<tag>out = "SKIP"</tag>
@@ -60,15 +84,21 @@
       <item>
         I hate this music<tag>out = "SKIP"</tag>
       </item>
+      <item>
+        I don't like this music <tag>out = "SKIP"</tag>
+      </item>
 
       <item>
-        I wanna listen the previous song<tag>out = "BACK"</tag>
-      </item>
-      <item>
-        I liked the previous song<tag>out = "BACK"</tag>
+        I wanna listen the last song<tag>out = "BACK"</tag>
       </item>
       <item>
         I wanna repeat the previous song<tag>out = "BACK"</tag>
+      </item>
+            <item>
+        I want to listen the last song<tag>out = "BACK"</tag>
+      </item>
+      <item>
+        I want to repeat the previous song<tag>out = "BACK"</tag>
       </item>
 
       <item>
@@ -103,8 +133,10 @@
         something<tag>out = "SOMETHING"</tag>
       </item>
       <item>Queen</item>
+      <item>David Bowie</item>
       <item>Bastille</item>
       <item>Guns N' Roses</item>
+      <item>The Doors</item>
     </one-of>
   </rule>
 
@@ -114,6 +146,7 @@
         <tag>out = "EMP"</tag>
       </item>
       <item>Paradise City</item>
+      <item>Heroes</item>
     </one-of>
   </rule>
   
@@ -123,6 +156,7 @@
         <tag>out = "EMP"</tag>
       </item>
       <item>Paradise City</item>
+      <item>Heroes</item>
     </one-of>
   </rule>
 
@@ -131,6 +165,7 @@
       <item>
         <tag>out = "EMP"</tag>
       </item>
+      <item>Strange Days</item>
       <item>Appetite For Destruction</item>
     </one-of>
   </rule>
@@ -140,6 +175,7 @@
       <item>
         <tag>out = "EMP"</tag>
       </item>
+      <item>1967</item>
       <item>1987</item>
       <item>1991</item>
       <item>2008</item>

@@ -92,6 +92,7 @@ namespace AppGui
                     break;
                 case "BACK":
                     spotify.Previous();
+                    spotify.Previous();
                     break;
                 case "VDOWN":
                     volume = spotify.GetSpotifyVolume();
@@ -134,6 +135,9 @@ namespace AppGui
 
                     ErrorResponse x = webSpotify.AddPlaylistTrack("4lzrg4ac5nyj1f5bosl1pse1i", playlist1, spotify.GetStatus().Track.TrackResource.Uri);
                     break;
+                /*default:
+                    MessageBox.Show("Command not supported");
+                    break;*/
             }
 
             if (command == "LISTEN")
@@ -154,7 +158,7 @@ namespace AppGui
                         {
                             String query = song_1 + "+" + artist;
                             item = webSpotify.SearchItems(query, SearchType.Track);
-                            spotify.PlayURL(item.Tracks.Items[0].Uri);
+                                spotify.PlayURL(item.Tracks.Items[0].Uri);
                         }
                     }
                     else {
@@ -168,7 +172,7 @@ namespace AppGui
                                     break;
                                 default:
                                     item = webSpotify.SearchItems(artist, SearchType.Artist);
-                                    spotify.PlayURL(item.Artists.Items[0].Uri);
+                                        spotify.PlayURL(item.Artists.Items[0].Uri);
                                     break;
                             }
                         }
@@ -176,6 +180,7 @@ namespace AppGui
                         else if(artist != "EMP" && from != "EMP")
                         {
                             item = webSpotify.SearchItems(artist, SearchType.Artist | SearchType.Album);
+                            
                             foreach (SimpleAlbum simple_album in item.Albums.Items)
                             {
                                 String [] album_date = simple_album.ReleaseDate.Split('-');
@@ -190,6 +195,10 @@ namespace AppGui
                         else if (artist == "EMP" && song_2 != "EMP") {
                             item = webSpotify.SearchItems(song_2, SearchType.Track);
                             spotify.PlayURL(item.Tracks.Items[0].Uri);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Command not supported");
                         }
                     }
                 });
