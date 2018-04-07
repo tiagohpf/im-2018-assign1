@@ -134,12 +134,17 @@ namespace AppGui
                     {
                         if (p.Items[i].Track.Name.Equals(spotify.GetStatus().Track.TrackResource.Name))
                         {
-                            MessageBox.Show("Music already in playlist");
+                            //MessageBox.Show("Music already in playlist");
+                            t.Speak("This music is already in your playlist");
                             return;
                         }
                     }
 
                     ErrorResponse x = webSpotify.AddPlaylistTrack("4lzrg4ac5nyj1f5bosl1pse1i", playlist1, spotify.GetStatus().Track.TrackResource.Uri);
+                    if (!x.HasError())
+                    {
+                        t.Speak("This music was added to your playlist");
+                    }
                     break;
                 /*default:
                     MessageBox.Show("Command not supported");
