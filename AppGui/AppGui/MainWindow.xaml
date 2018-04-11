@@ -5,13 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppGui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="169.052" Width="240.116">
+        Title="Spotify Voice Controller" Height="169.052" Width="240.116">
     <Grid>
-        <StackPanel Orientation="Horizontal" Margin="10">
-            <Rectangle x:Name="rectangle" Width="50" Height="50" Fill="Gray" Margin="10"></Rectangle>
-            <Ellipse x:Name="circle" Width="50" Height="50" Fill="Gray" Margin="10"></Ellipse>
-            <Polygon x:Name="triangle" Width="50" Height="50" Fill="Gray" Points="25,0 50,50 0,50" Margin="10"></Polygon>
-        </StackPanel>
-
+        <Label
+            Content="Spotify Voice Controller" FontSize="15" FontFamily="Montserrat" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Image Source="spotify-logo.png" Margin="182,60,10,41" RenderTransformOrigin="2.922,1.876">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="7.008"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
     </Grid>
 </Window>
