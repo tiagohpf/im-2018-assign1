@@ -157,14 +157,9 @@ namespace AppGui
                         t.Speak("This music was added to your playlist");
                     }
                     break;
-                /*default:
-                    MessageBox.Show("Command not supported");
-                    break;*/
-            }
 
-            if (command == "LISTEN")
-            {
-                App.Current.Dispatcher.Invoke(() =>
+                case "LISTEN":
+                    App.Current.Dispatcher.Invoke(() =>
                 {
                     if (by == "BY")
                     {
@@ -173,14 +168,25 @@ namespace AppGui
                         {
                             String query = album + "+" + artist;
                             item = webSpotify.SearchItems(query, SearchType.Album);
-                            spotify.PlayURL(item.Albums.Items[0].Uri);
+                            if (item.Albums.Items.Count > 0)
+                            {
+                                spotify.PlayURL(item.Albums.Items[0].Uri);
+                            }
+                            else
+                            {
+                                t.Speak("There is no album from that artist");
+                            }
                         }
                         // I wanna listen {song} by {artist}
                         else if (song_1 != "EMP" && album == "EMP")
                         {
                             String query = song_1 + "+" + artist;
                             item = webSpotify.SearchItems(query, SearchType.Track);
+                            if (item.Tracks.Items.Count > 0)
+                            {
                                 spotify.PlayURL(item.Tracks.Items[0].Uri);
+                            }
+                            t.Speak("There is no music with that name from that artist");
                         }
                     }
                     else {
@@ -235,6 +241,7 @@ namespace AppGui
                         }
                     }
                 });
+                    break;
             }
         }
     }
