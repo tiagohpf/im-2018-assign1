@@ -27,6 +27,10 @@
         <tag>out.song_2 = rules.latest();</tag>
       </item>
       <item>
+        <ruleref uri="#genre"/>
+        <tag>out.genre = rules.latest();</tag>
+      </item>
+      <item>
         <ruleref uri="#from"/>
         <tag>out.from = rules.latest();</tag>
       </item>
@@ -52,8 +56,9 @@
       <item>
         Add this to my playlist<tag>out = "ADD"</tag>
       </item>
+
       <item>
-        I wanna listen to<tag>out = "LISTEN"</tag>
+        I wanna listen<tag>out = "LISTEN"</tag>
       </item>
       <item>
         I want to listen to <tag>out = "LISTEN"</tag>
@@ -87,6 +92,9 @@
       <item>
         I don't like this music <tag>out = "SKIP"</tag>
       </item>
+      <item>
+        I wanna listen the next song<tag>out = "SKIP"</tag>
+      </item>
 
       <item>
         I wanna listen the last song<tag>out = "BACK"</tag>
@@ -94,7 +102,7 @@
       <item>
         I wanna repeat the previous song<tag>out = "BACK"</tag>
       </item>
-            <item>
+      <item>
         I want to listen the last song<tag>out = "BACK"</tag>
       </item>
       <item>
@@ -149,7 +157,7 @@
       <item>Heroes</item>
     </one-of>
   </rule>
-  
+
   <rule id="song_2">
     <one-of>
       <item>
@@ -157,6 +165,34 @@
       </item>
       <item>Paradise City</item>
       <item>Heroes</item>
+    </one-of>
+  </rule>
+
+  <rule id="genre">
+    <one-of>
+      <item>
+        <tag>out = "EMP"</tag>
+      </item>
+      <item>Alternative Rock</item>
+      <item>Blues</item>
+      <item>Brazilian</item>
+      <item>Classical</item>
+      <item>Dance</item>
+      <item>Disco</item>
+      <item>Electronic</item>
+      <item>Funk</item>
+      <item>Jazz</item>
+      <item>Hip-Hop</item>
+      <item>Indie</item>
+      <item>Indie Rock</item>
+      <item>Latin</item>
+      <item>Pop</item>
+      <item>Pop-Rock</item>
+      <item>Punk</item>
+      <item>Rap</item>
+      <item>Reggae</item>
+      <item>Rock</item>
+      <item>Soul</item>
     </one-of>
   </rule>
 

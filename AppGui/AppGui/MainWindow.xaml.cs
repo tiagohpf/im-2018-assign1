@@ -78,8 +78,9 @@ namespace AppGui
             String by = (string)json.recognized[3].ToString();
             String artist = (string)json.recognized[4].ToString();
             String song_2 = (string)json.recognized[5].ToString();
-            String from = (string)json.recognized[6].ToString();
-            String year = (string)json.recognized[7].ToString();
+            String genre = (string)json.recognized[6].ToString();
+            String from = (string)json.recognized[7].ToString();
+            String year = (string)json.recognized[8].ToString();
             SearchItem item;
             Tts t = new Tts();
             float volume;
@@ -204,15 +205,23 @@ namespace AppGui
                             t.Speak("There is no album from that artist on that year");
                         }
                         // I wanna listen {song}
-                        else if (artist == "EMP" && song_2 != "EMP") {
+                        else if (artist == "EMP" && genre == "EMP" && song_2 != "EMP") {
                             item = webSpotify.SearchItems(song_2, SearchType.Track);
                             spotify.PlayURL(item.Tracks.Items[0].Uri);
                         }
+                        // I wanna listen {genre}
+                        else if (artist == "EMP" && genre != "EMP" && song_2 == "EMP")
+                        {
+                            item = webSpotify.SearchItems(genre, SearchType.Album | SearchType.Track | SearchType.Playlist);
+                            int results_size = item.Playlists.Items.Count;
+                            // Choose playlist randomly
+                            Random random = new Random();
+                            int index = random.Next(0, results_size);
+                            spotify.PlayURL(item.Playlists.Items[index].Uri);
+                        }
                         else
                         {
-                            //strange days from 1967
-                            //MessageBox.Show("Command not supported");
-                            t.Speak("I am very sorry but this command is not supported");
+                            t.Speak("I'm very sorry but this command is not supported");
                         }
                     }
                 });
