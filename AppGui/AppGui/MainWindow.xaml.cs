@@ -132,10 +132,10 @@ namespace AppGui
                     if (spotify.IsSpotifyMuted())
                         spotify.UnMute();
                     break;
-                case "PLAYLIST":
+                /*case "PLAYLIST":
                     String playlist = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Uri;
                     spotify.PlayURL(playlist);
-                    break;
+                    break;*/
 
                 case "ADD":
                     String playlist1 = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Id;
@@ -196,7 +196,8 @@ namespace AppGui
                             switch (artist)
                             {
                                 case "SOMETHING":
-                                    spotify.Play();
+                                    String playlist = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Uri;
+                                    spotify.PlayURL(playlist);
                                     break;
                                 default:
                                     item = webSpotify.SearchItems(artist, SearchType.Artist);

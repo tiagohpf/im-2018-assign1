@@ -60,10 +60,7 @@
         I wanna listen<tag>out = "LISTEN"</tag>
       </item>
       <item>
-        I want to listen to <tag>out = "LISTEN"</tag>
-      </item>
-      <item>
-        Just play<tag>out = "PLAY"</tag>
+        I want to listen<tag>out = "LISTEN"</tag>
       </item>
       <item>
         Continue<tag>out = "PLAY"</tag>
@@ -73,7 +70,13 @@
       </item>
 
       <item>
+        Stop <tag>out = "PAUSE"</tag>
+      </item>
+      <item>
         Stop the music<tag>out = "PAUSE"</tag>
+      </item>
+      <item>
+        Pause <tag>out = "PAUSE"</tag>
       </item>
       <item>
         Pause the music<tag>out = "PAUSE"</tag>
@@ -94,7 +97,9 @@
       <item>
         I wanna listen the next song<tag>out = "SKIP"</tag>
       </item>
-
+      <item>
+        Skip <tag>out = "SKIP"</tag>
+      </item>
       <item>
         I wanna listen the last song<tag>out = "BACK"</tag>
       </item>
@@ -107,7 +112,9 @@
       <item>
         I want to repeat the previous song<tag>out = "BACK"</tag>
       </item>
-
+      <item>
+        Play last song <tag>out = "BACK"</tag>
+      </item>
       <item>
         Turn up the volume<tag>out = "VUP"</tag>
       </item>
