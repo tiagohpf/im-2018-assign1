@@ -61,7 +61,7 @@ namespace AppGui
 
             StatusResponse status = spotify.GetStatus(); //status contains infos
             t.Speak("You can close the browser now, hope you have a good time with our application");
-            
+
             mmiC = new MmiCommunication("localhost", 8000, "User1", "GUI");
             mmiC.Message += MmiC_Message;
             mmiC.Start();
@@ -75,10 +75,9 @@ namespace AppGui
             dynamic json = JsonConvert.DeserializeObject(com);
             String command = (string)json.recognized[0].ToString();
             String album = (string)json.recognized[1].ToString();
-            String song_1 = (string)json.recognized[2].ToString();
+            String song = (string)json.recognized[2].ToString();
             String by = (string)json.recognized[3].ToString();
             String artist = (string)json.recognized[4].ToString();
-            //String song_2 = (string)json.recognized[5].ToString();
             String genre = (string)json.recognized[5].ToString();
             String from = (string)json.recognized[6].ToString();
             String year = (string)json.recognized[7].ToString();
@@ -144,8 +143,6 @@ namespace AppGui
                     {
                         if (p.Items[i].Track.Name.Equals(spotify.GetStatus().Track.TrackResource.Name))
                         {
-                            //MessageBox.Show("Music already in playlist");
-                            
                             t.Speak("This music is already in your playlist");
                             return;
                         }
@@ -164,7 +161,7 @@ namespace AppGui
                     if (by == "BY")
                     {
                         // I wanna listen {album} by {artist}
-                        if (album != "EMP" && song_1 == "EMP")
+                        if (album != "EMP" && song == "EMP")
                         {
                             String query = album + "+" + artist;
                             item = webSpotify.SearchItems(query, SearchType.Album);
@@ -178,15 +175,18 @@ namespace AppGui
                             }
                         }
                         // I wanna listen {song} by {artist}
-                        else if (song_1 != "EMP" && album == "EMP")
+                        else if (song != "EMP" && album == "EMP")
                         {
-                            String query = song_1 + "+" + artist;
+                            String query = song + "+" + artist;
                             item = webSpotify.SearchItems(query, SearchType.Track);
                             if (item.Tracks.Items.Count > 0)
                             {
                                 spotify.PlayURL(item.Tracks.Items[0].Uri);
                             }
-                            t.Speak("There is no music with that name from that artist");
+                            else
+                            {
+                                t.Speak("There is no song with that name from that artist");
+                            }
                         }
                     }
                     else {
@@ -201,40 +201,60 @@ namespace AppGui
                                     break;
                                 default:
                                     item = webSpotify.SearchItems(artist, SearchType.Artist);
-                                        spotify.PlayURL(item.Artists.Items[0].Uri);
+                                    spotify.PlayURL(item.Artists.Items[0].Uri);
                                     break;
                             }
                         }
                         // I wanna listen {artist} from {year}
-                        else if(artist != "EMP" && from != "EMP")
+                        else if (artist != "EMP" && from != "EMP" && year != "EMP")
                         {
                             item = webSpotify.SearchItems(artist, SearchType.Artist | SearchType.Album);
-                            
-                            foreach (SimpleAlbum simple_album in item.Albums.Items)
+                            if (item.Albums.Items.Count > 0)
                             {
-                                String [] album_date = simple_album.ReleaseDate.Split('-');
-                                if (album_date[0] == year)
+                                foreach (SimpleAlbum simple_album in item.Albums.Items)
                                 {
-                                    spotify.PlayURL(simple_album.Uri);
-                                    return;
+                                    String[] album_date = simple_album.ReleaseDate.Split('-');
+                                    if (album_date[0] == year)
+                                    {
+                                        spotify.PlayURL(simple_album.Uri);
+                                        return;
+                                    }
                                 }
                             }
-                            t.Speak("There is no album from that artist on that year");
+                            else
+                            {
+                                t.Speak("There is no album from that artist on that year");
+                            }
                         }
                         // I wanna listen {song}
-                        else if (artist == "EMP" && genre == "EMP" && song_1 != "EMP") {
-                            item = webSpotify.SearchItems(song_1, SearchType.Track);
-                            spotify.PlayURL(item.Tracks.Items[0].Uri);
+                        else if (artist == "EMP" && genre == "EMP" && song != "EMP")
+                        {
+                            item = webSpotify.SearchItems(song, SearchType.Track);
+                            if (item.Tracks.Items.Count > 0)
+                            {
+                                spotify.PlayURL(item.Tracks.Items[0].Uri);
+                            }
+                            else
+                            {
+                                t.Speak("There is no song with that name");
+                            }
                         }
                         // I wanna listen {genre}
-                        else if (artist == "EMP" && genre != "EMP" && song_1 == "EMP")
+                        else if (artist == "EMP" && genre != "EMP" && song == "EMP")
                         {
                             item = webSpotify.SearchItems(genre, SearchType.Album | SearchType.Track | SearchType.Playlist);
                             int results_size = item.Playlists.Items.Count;
-                            // Choose playlist randomly
-                            Random random = new Random();
-                            int index = random.Next(0, results_size);
-                            spotify.PlayURL(item.Playlists.Items[index].Uri);
+                            if (results_size > 0)
+                            {
+                                // Choose playlist randomly
+                                Random random = new Random();
+                                int index = random.Next(0, results_size);
+                                spotify.PlayURL(item.Playlists.Items[index].Uri);
+                            }
+                            else
+                            {
+                                t.Speak("There are no playlists with that genre");
+                            }
                         }
                         else
                         {
