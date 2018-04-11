@@ -23,10 +23,6 @@
         <tag>out.artist = rules.latest();</tag>
       </item>
       <item>
-        <ruleref uri="#song_2"/>
-        <tag>out.song_2 = rules.latest();</tag>
-      </item>
-      <item>
         <ruleref uri="#genre"/>
         <tag>out.genre = rules.latest();</tag>
       </item>
@@ -152,16 +148,6 @@
   </rule>
 
   <rule id="song_1">
-    <one-of>
-      <item>
-        <tag>out = "EMP"</tag>
-      </item>
-      <item>Paradise City</item>
-      <item>Heroes</item>
-    </one-of>
-  </rule>
-
-  <rule id="song_2">
     <one-of>
       <item>
         <tag>out = "EMP"</tag>

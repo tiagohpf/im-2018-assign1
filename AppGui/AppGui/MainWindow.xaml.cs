@@ -78,10 +78,10 @@ namespace AppGui
             String song_1 = (string)json.recognized[2].ToString();
             String by = (string)json.recognized[3].ToString();
             String artist = (string)json.recognized[4].ToString();
-            String song_2 = (string)json.recognized[5].ToString();
-            String genre = (string)json.recognized[6].ToString();
-            String from = (string)json.recognized[7].ToString();
-            String year = (string)json.recognized[8].ToString();
+            //String song_2 = (string)json.recognized[5].ToString();
+            String genre = (string)json.recognized[5].ToString();
+            String from = (string)json.recognized[6].ToString();
+            String year = (string)json.recognized[7].ToString();
             SearchItem item;
             float volume;
 
@@ -215,12 +215,12 @@ namespace AppGui
                             t.Speak("There is no album from that artist on that year");
                         }
                         // I wanna listen {song}
-                        else if (artist == "EMP" && genre == "EMP" && song_2 != "EMP") {
-                            item = webSpotify.SearchItems(song_2, SearchType.Track);
+                        else if (artist == "EMP" && genre == "EMP" && song_1 != "EMP") {
+                            item = webSpotify.SearchItems(song_1, SearchType.Track);
                             spotify.PlayURL(item.Tracks.Items[0].Uri);
                         }
                         // I wanna listen {genre}
-                        else if (artist == "EMP" && genre != "EMP" && song_2 == "EMP")
+                        else if (artist == "EMP" && genre != "EMP" && song_1 == "EMP")
                         {
                             item = webSpotify.SearchItems(genre, SearchType.Album | SearchType.Track | SearchType.Playlist);
                             int results_size = item.Playlists.Items.Count;

@@ -129,3 +129,4 @@ C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.cspro
 C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csproj.CoreCompileInputs.cache
 C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.exe
 C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.pdb
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csprojResolveAssemblyReference.cache
