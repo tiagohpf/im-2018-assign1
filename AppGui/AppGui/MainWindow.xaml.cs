@@ -263,6 +263,10 @@ namespace AppGui
                     }
                 });
                     break;
+
+                default:
+                    t.Speak("I am very sorry but this command is not supported");
+                    break;
             }
         }
     }
