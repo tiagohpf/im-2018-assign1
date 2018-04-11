@@ -91,24 +91,6 @@ C:\Users\Tiago Faria\Documents\Dropbox\UA\MEI\IM\Basis4Assignment2\AppGui\AppGui
 C:\Users\Tiago Faria\Documents\Dropbox\UA\MEI\IM\Basis4Assignment2\AppGui\AppGui\obj\Debug\AppGui.g.resources
 C:\Users\Tiago Faria\Documents\Dropbox\UA\MEI\IM\Basis4Assignment2\AppGui\AppGui\obj\Debug\AppGui.Properties.Resources.resources
 C:\Users\Tiago Faria\Documents\Dropbox\UA\MEI\IM\Basis4Assignment2\AppGui\AppGui\obj\Debug\AppGui.csproj.GenerateResource.Cache
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\AppGui.exe.config
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\AppGui.exe
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\AppGui.pdb
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\Newtonsoft.Json.dll
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\SpotifyAPI.dll
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\Newtonsoft.Json.xml
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\SpotifyAPI.xml
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\MainWindow.g.cs
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\App.g.cs
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui_MarkupCompile.cache
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui_MarkupCompile.lref
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\MainWindow.baml
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.g.resources
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.Properties.Resources.resources
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csproj.GenerateResource.Cache
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csproj.CoreCompileInputs.cache
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.exe
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.pdb
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csprojResolveAssemblyReference.cache
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\MainWindow.g.cs
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\App.g.cs
@@ -127,5 +109,23 @@ C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.Pr
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csproj.GenerateResource.Cache
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.exe
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.pdb
-C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\Microsoft.Speech.dll
 C:\Users\Tiago Faria\Documents\im-2018-assign1\AppGui\AppGui\bin\Debug\Microsoft.Speech.dll
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\AppGui.exe.config
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\AppGui.exe
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\AppGui.pdb
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\Microsoft.Speech.dll
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\Newtonsoft.Json.dll
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\SpotifyAPI.dll
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\Newtonsoft.Json.xml
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\bin\Debug\SpotifyAPI.xml
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\MainWindow.g.cs
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\App.g.cs
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui_MarkupCompile.cache
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui_MarkupCompile.lref
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\MainWindow.baml
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.g.resources
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.Properties.Resources.resources
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csproj.GenerateResource.Cache
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.csproj.CoreCompileInputs.cache
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.exe
+C:\Users\kanto\Documents\IM\im-2018-assign1\AppGui\AppGui\obj\Debug\AppGui.pdb

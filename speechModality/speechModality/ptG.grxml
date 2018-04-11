@@ -45,6 +45,9 @@
   <rule id="command">
     <one-of>
       <item>
+        What can I do <tag>out = "HELP"</tag>
+      </item>
+      <item>
         Add the current song to my playlist<tag>out = "ADD"</tag>
       </item>
       <item>

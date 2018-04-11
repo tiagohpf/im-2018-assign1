@@ -26,11 +26,11 @@ namespace AppGui
         private MmiCommunication mmiC;
         private static SpotifyLocalAPI spotify;
         private SpotifyWebAPI webSpotify;
+        private Tts t = new Tts();
         public MainWindow()
         {
             InitializeComponent();
 
-            Tts t = new Tts();
             t.Speak("Wait a few seconds, we are just getting everything ready for you!");
             SpotifyAPI spotifyAPI = new SpotifyAPI();
             webSpotify = spotifyAPI.getAPI();
@@ -61,6 +61,7 @@ namespace AppGui
 
             StatusResponse status = spotify.GetStatus(); //status contains infos
             t.Speak("You can close the browser now, hope you have a good time with our application");
+            
             mmiC = new MmiCommunication("localhost", 8000, "User1", "GUI");
             mmiC.Message += MmiC_Message;
             mmiC.Start();
@@ -82,12 +83,20 @@ namespace AppGui
             String from = (string)json.recognized[7].ToString();
             String year = (string)json.recognized[8].ToString();
             SearchItem item;
-            Tts t = new Tts();
             float volume;
+
+            if (t.getSpeech() == true)
+            {
+                MessageBox.Show("Speaking");
+                return;
+            }
 
             // Using just a normal command
             switch (command)
             {
+                case "HELP":
+                    t.Speak("You can play or stop music, skip music, listen to previous music, I wanna listen Queen");
+                    break;
                 case "PLAY":
                     spotify.Play();
                     break;
@@ -136,6 +145,7 @@ namespace AppGui
                         if (p.Items[i].Track.Name.Equals(spotify.GetStatus().Track.TrackResource.Name))
                         {
                             //MessageBox.Show("Music already in playlist");
+                            
                             t.Speak("This music is already in your playlist");
                             return;
                         }
@@ -221,7 +231,7 @@ namespace AppGui
                         }
                         else
                         {
-                            t.Speak("I'm very sorry but this command is not supported");
+                            t.Speak("I am very sorry but this command is not supported");
                         }
                     }
                 });

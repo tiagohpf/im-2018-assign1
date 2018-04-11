@@ -15,7 +15,8 @@ namespace multimodal
     class Tts
     {
         SpeechSynthesizer tts = null;
-        static SoundPlayer player = new SoundPlayer();
+        private bool speach;
+        //static SoundPlayer player = new SoundPlayer();
 
         /*
          * Text to Speech
@@ -42,6 +43,7 @@ namespace multimodal
 
         // Output information about all of the installed voices. 
         Console.WriteLine("Installed voices -");
+                tts.SetOutputToDefaultAudioDevice();
         foreach (InstalledVoice voice in synth.GetInstalledVoices())
         {
           VoiceInfo info = voice.VoiceInfo;
@@ -103,30 +105,31 @@ namespace multimodal
          */
         public void Speak(string text)
         {
-            while (player.Stream != null) { 
+            /*while (player.Stream != null) { 
                 Console.WriteLine("Waiting...");
-                }
-            
+                }*/
+
             //create audio stream with speech
-            player.Stream = new System.IO.MemoryStream();
-            tts.SetOutputToWaveStream(player.Stream);
+            //player.Stream = new System.IO.MemoryStream();
+            //tts.SetOutputToWaveStream(player.Stream);
+            speach = true;
             tts.SpeakAsync(text);
         }
 
         public void Speak(string text, int rate)
         {
-
+            speach = true;
             Console.WriteLine("Speak method called , version with samplerate parameter");
 
-            while (player.Stream != null)
+            /*while (player.Stream != null)
             {
                 Console.WriteLine("Waiting...");
-            }
+            }*/
 
 
             //create audio stream with speech
-            player.Stream = new System.IO.MemoryStream();
-            tts.SetOutputToWaveStream(player.Stream);
+            //player.Stream = new System.IO.MemoryStream();
+            //tts.SetOutputToWaveStream(player.Stream);
             tts.Rate=rate;
            // tts.SpeakAsync(text);
 
@@ -144,13 +147,19 @@ namespace multimodal
          */
         void tts_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
         {
-            if (player.Stream != null)
+            speach = false;
+            /*if (player.Stream != null)
             {
                 //play stream
                 player.Stream.Position = 0;
                 player.Play();
                 player.Stream = null;  //  NEW 2015
-            }
+            }*/
+        }
+
+        public bool getSpeech()
+        {
+            return speach;
         }
     }
 }
