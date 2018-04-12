@@ -86,7 +86,7 @@ namespace AppGui
 
             if (t.getSpeech() == true)
             {
-                MessageBox.Show("Speaking");
+                //MessageBox.Show("Speaking");
                 return;
             }
 
@@ -188,9 +188,13 @@ namespace AppGui
                                 t.Speak("There is no song with that name from that artist");
                             }
                         }
+                        else
+                        {
+                            t.Speak("There is no algum or song with that name from that artist");
+                        }
                     }
                     else {
-                        // I wanna listen {artist}
+                        // I wanna listen {artist} or {something}
                         if (artist != "EMP" && from == "EMP")
                         {
                             switch (artist)
@@ -220,6 +224,7 @@ namespace AppGui
                                         return;
                                     }
                                 }
+                                t.Speak("There is no album from that artist on that year");
                             }
                             else
                             {
@@ -239,8 +244,21 @@ namespace AppGui
                                 t.Speak("There is no song with that name");
                             }
                         }
+                        // I wanna listen {album}
+                        else if (album != "EMP" && artist == "EMP" && genre == "EMP" && song == "EMP" && from == "EMP" && year == "EMP" )
+                        {
+                            item = webSpotify.SearchItems(album, SearchType.Album);
+                            if (item.Albums.Items.Count > 0)
+                            {
+                                spotify.PlayURL(item.Albums.Items[0].Uri);
+                            }
+                            else
+                            {
+                                t.Speak("There is no album with that name");
+                            }
+                        }
                         // I wanna listen {genre}
-                        else if (artist == "EMP" && genre != "EMP" && song == "EMP")
+                        else if (artist == "EMP" && genre != "EMP" && song == "EMP" && album == "EMP" && from == "EMP" && year == "EMP")
                         {
                             item = webSpotify.SearchItems(genre, SearchType.Album | SearchType.Track | SearchType.Playlist);
                             int results_size = item.Playlists.Items.Count;
