@@ -232,7 +232,7 @@ namespace AppGui
                             }
                         }
                         // I wanna listen {song}
-                        else if (artist == "EMP" && genre == "EMP" && song != "EMP")
+                        else if (artist == "EMP" && genre == "EMP" && song != "EMP" && from == "EMP" && year == "EMP")
                         {
                             item = webSpotify.SearchItems(song, SearchType.Track);
                             if (item.Tracks.Items.Count > 0)
