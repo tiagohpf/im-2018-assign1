@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Xml.Linq;
 using mmisharp;
 using Newtonsoft.Json;
@@ -13,7 +10,6 @@ using SpotifyAPI.Local.Models; //Models for the JSON-responses
 using SpotifyAPI.Web.Enums;
 using SpotifyAPI.Web.Models;
 using SpotifyAPI.Web;
-using System.Collections.Generic;
 using multimodal;
 
 namespace AppGui
@@ -41,20 +37,17 @@ namespace AppGui
             });
             if (!SpotifyLocalAPI.IsSpotifyRunning())
             {
-                //MessageBox.Show("Spotify is not running");
                 t.Speak("Spotify is not running, can you please turn it on ?");
                 return; //Make sure the spotify client is running
             }
             if (!SpotifyLocalAPI.IsSpotifyWebHelperRunning())
             {
-                //MessageBox.Show("Spotify WebHelper is not running");
                 t.Speak("Spotify WebHelper is not running");
                 return; //Make sure the WebHelper is running
             }
 
             if (!spotify.Connect())
             {
-                //MessageBox.Show("Spotify is not connected");
                 t.Speak("Spotify is not connected.");
                 return; //We need to call Connect before fetching infos, this will handle Auth stuff
             }
@@ -86,7 +79,6 @@ namespace AppGui
 
             if (t.getSpeech() == true)
             {
-                //MessageBox.Show("Speaking");
                 return;
             }
 
@@ -131,11 +123,6 @@ namespace AppGui
                     if (spotify.IsSpotifyMuted())
                         spotify.UnMute();
                     break;
-                /*case "PLAYLIST":
-                    String playlist = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Uri;
-                    spotify.PlayURL(playlist);
-                    break;*/
-
                 case "ADD":
                     String playlist1 = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Id;
                     Paging<PlaylistTrack> p = webSpotify.GetPlaylistTracks("4lzrg4ac5nyj1f5bosl1pse1i", playlist1);
@@ -190,7 +177,7 @@ namespace AppGui
                         }
                         else
                         {
-                            t.Speak("There is no algum or song with that name from that artist");
+                            t.Speak("There is no album or song with that name from that artist");
                         }
                     }
                     else {

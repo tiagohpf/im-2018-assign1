@@ -41,8 +41,18 @@
   <rule id="command">
     <one-of>
       <item>
-        What can I do <tag>out = "HELP"</tag>
+        What can I do? <tag>out = "HELP"</tag>
       </item>
+      <item>
+        Help me <tag>out = "HELP"</tag>
+      </item>
+      <item>
+        I need help <tag>out = "HELP"</tag>
+      </item>
+      <item>
+        I don't know what to do <tag>out = "HELP"</tag>
+      </item>
+        
       <item>
         Add the current song to my playlist<tag>out = "ADD"</tag>
       </item>
