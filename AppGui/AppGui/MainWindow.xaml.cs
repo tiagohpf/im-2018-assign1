@@ -66,14 +66,15 @@ namespace AppGui
             var doc = XDocument.Parse(e.Message);
             var com = doc.Descendants("command").FirstOrDefault().Value;
             dynamic json = JsonConvert.DeserializeObject(com);
-            String command = (string)json.recognized[0].ToString();
-            String album = (string)json.recognized[1].ToString();
-            String song = (string)json.recognized[2].ToString();
-            String by = (string)json.recognized[3].ToString();
-            String artist = (string)json.recognized[4].ToString();
-            String genre = (string)json.recognized[5].ToString();
-            String from = (string)json.recognized[6].ToString();
-            String year = (string)json.recognized[7].ToString();
+            double confidence = Double.Parse((string)json.recognized[0].ToString());
+            String command = (string)json.recognized[1].ToString();
+            String album = (string)json.recognized[2].ToString();
+            String song = (string)json.recognized[3].ToString();
+            String by = (string)json.recognized[4].ToString();
+            String artist = (string)json.recognized[5].ToString();
+            String genre = (string)json.recognized[6].ToString();
+            String from = (string)json.recognized[7].ToString();
+            String year = (string)json.recognized[8].ToString();
             SearchItem item;
             float volume;
 
@@ -82,196 +83,204 @@ namespace AppGui
                 return;
             }
 
-            // Using just a normal command
-            switch (command)
+            if (confidence < 0.3)
             {
-                case "HELP":
-                    t.Speak("You can play or stop music, skip music, listen to previous music, I wanna listen Queen");
-                    break;
-                case "PLAY":
-                    spotify.Play();
-                    break;
-                case "PAUSE":
-                    spotify.Pause();
-                    break;
-                case "SKIP":
-                    spotify.Skip();
-                    break;
-                case "BACK":
-                    spotify.Previous();
-                    spotify.Previous();
-                    break;
-                case "VDOWN":
-                    volume = spotify.GetSpotifyVolume();
-                    if (volume - 25 >= 0)
-                        spotify.SetSpotifyVolume(volume - 25);
-                    else
-                        spotify.SetSpotifyVolume(0);
-                    break;
-                case "VUP":
-                    volume = spotify.GetSpotifyVolume();
-                    if (volume + 25 <= 100)
-                        spotify.SetSpotifyVolume(volume + 25);
-                    else
-                        spotify.SetSpotifyVolume(100);
-                    break;
-                case "MUTE":
-                    if (!spotify.IsSpotifyMuted())
-                        spotify.Mute();
-                    break;
-                case "UNMUTE":
-                    if (spotify.IsSpotifyMuted())
-                        spotify.UnMute();
-                    break;
-                case "ADD":
-                    String playlist1 = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Id;
-                    Paging<PlaylistTrack> p = webSpotify.GetPlaylistTracks("4lzrg4ac5nyj1f5bosl1pse1i", playlist1);
-                    for (var i = 0; i < p.Items.Count; i++)
-                    {
-                        if (p.Items[i].Track.Name.Equals(spotify.GetStatus().Track.TrackResource.Name))
-                        {
-                            t.Speak("This music is already in your playlist");
-                            return;
-                        }
-                    }
+                t.Speak("Sentence not valid. Please try again");
+            }
 
-                    ErrorResponse x = webSpotify.AddPlaylistTrack("4lzrg4ac5nyj1f5bosl1pse1i", playlist1, spotify.GetStatus().Track.TrackResource.Uri);
-                    if (!x.HasError())
-                    {
-                        t.Speak("This music was added to your playlist");
-                    }
-                    break;
-
-                case "LISTEN":
-                    App.Current.Dispatcher.Invoke(() =>
+            // Using just a normal command
+            else
+            {
+                switch (command)
                 {
-                    if (by == "BY")
+                    case "HELP":
+                        t.Speak("You can play or stop music, skip music, listen to previous music, I wanna listen Queen");
+                        break;
+                    case "PLAY":
+                        spotify.Play();
+                        break;
+                    case "PAUSE":
+                        spotify.Pause();
+                        break;
+                    case "SKIP":
+                        spotify.Skip();
+                        break;
+                    case "BACK":
+                        spotify.Previous();
+                        spotify.Previous();
+                        break;
+                    case "VDOWN":
+                        volume = spotify.GetSpotifyVolume();
+                        if (volume - 25 >= 0)
+                            spotify.SetSpotifyVolume(volume - 25);
+                        else
+                            spotify.SetSpotifyVolume(0);
+                        break;
+                    case "VUP":
+                        volume = spotify.GetSpotifyVolume();
+                        if (volume + 25 <= 100)
+                            spotify.SetSpotifyVolume(volume + 25);
+                        else
+                            spotify.SetSpotifyVolume(100);
+                        break;
+                    case "MUTE":
+                        if (!spotify.IsSpotifyMuted())
+                            spotify.Mute();
+                        break;
+                    case "UNMUTE":
+                        if (spotify.IsSpotifyMuted())
+                            spotify.UnMute();
+                        break;
+                    case "ADD":
+                        String playlist1 = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Id;
+                        Paging<PlaylistTrack> p = webSpotify.GetPlaylistTracks("4lzrg4ac5nyj1f5bosl1pse1i", playlist1);
+                        for (var i = 0; i < p.Items.Count; i++)
+                        {
+                            if (p.Items[i].Track.Name.Equals(spotify.GetStatus().Track.TrackResource.Name))
+                            {
+                                t.Speak("This music is already in your playlist");
+                                return;
+                            }
+                        }
+
+                        ErrorResponse x = webSpotify.AddPlaylistTrack("4lzrg4ac5nyj1f5bosl1pse1i", playlist1, spotify.GetStatus().Track.TrackResource.Uri);
+                        if (!x.HasError())
+                        {
+                            t.Speak("This music was added to your playlist");
+                        }
+                        break;
+
+                    case "LISTEN":
+                        App.Current.Dispatcher.Invoke(() =>
                     {
+                        if (by == "BY")
+                        {
                         // I wanna listen {album} by {artist}
                         if (album != "EMP" && song == "EMP")
-                        {
-                            String query = album + "+" + artist;
-                            item = webSpotify.SearchItems(query, SearchType.Album);
-                            if (item.Albums.Items.Count > 0)
                             {
-                                spotify.PlayURL(item.Albums.Items[0].Uri);
+                                String query = album + "+" + artist;
+                                item = webSpotify.SearchItems(query, SearchType.Album);
+                                if (item.Albums.Items.Count > 0)
+                                {
+                                    spotify.PlayURL(item.Albums.Items[0].Uri);
+                                }
+                                else
+                                {
+                                    t.Speak("There is no album from that artist");
+                                }
                             }
-                            else
-                            {
-                                t.Speak("There is no album from that artist");
-                            }
-                        }
                         // I wanna listen {song} by {artist}
                         else if (song != "EMP" && album == "EMP")
-                        {
-                            String query = song + "+" + artist;
-                            item = webSpotify.SearchItems(query, SearchType.Track);
-                            if (item.Tracks.Items.Count > 0)
                             {
-                                spotify.PlayURL(item.Tracks.Items[0].Uri);
+                                String query = song + "+" + artist;
+                                item = webSpotify.SearchItems(query, SearchType.Track);
+                                if (item.Tracks.Items.Count > 0)
+                                {
+                                    spotify.PlayURL(item.Tracks.Items[0].Uri);
+                                }
+                                else
+                                {
+                                    t.Speak("There is no song with that name from that artist");
+                                }
                             }
                             else
                             {
-                                t.Speak("There is no song with that name from that artist");
+                                t.Speak("There is no album or song with that name from that artist");
                             }
                         }
-                        else
-                        {
-                            t.Speak("There is no album or song with that name from that artist");
-                        }
-                    }
-                    else {
+                        else {
                         // I wanna listen {artist} or {something}
                         if (artist != "EMP" && from == "EMP")
-                        {
-                            switch (artist)
                             {
-                                case "SOMETHING":
-                                    String playlist = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Uri;
-                                    spotify.PlayURL(playlist);
-                                    break;
-                                default:
-                                    item = webSpotify.SearchItems(artist, SearchType.Artist);
-                                    spotify.PlayURL(item.Artists.Items[0].Uri);
-                                    break;
+                                switch (artist)
+                                {
+                                    case "SOMETHING":
+                                        String playlist = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Uri;
+                                        spotify.PlayURL(playlist);
+                                        break;
+                                    default:
+                                        item = webSpotify.SearchItems(artist, SearchType.Artist);
+                                        spotify.PlayURL(item.Artists.Items[0].Uri);
+                                        break;
+                                }
                             }
-                        }
                         // I wanna listen {artist} from {year}
                         else if (artist != "EMP" && from != "EMP" && year != "EMP")
-                        {
-                            item = webSpotify.SearchItems(artist, SearchType.Artist | SearchType.Album);
-                            if (item.Albums.Items.Count > 0)
                             {
-                                foreach (SimpleAlbum simple_album in item.Albums.Items)
+                                item = webSpotify.SearchItems(artist, SearchType.Artist | SearchType.Album);
+                                if (item.Albums.Items.Count > 0)
                                 {
-                                    String[] album_date = simple_album.ReleaseDate.Split('-');
-                                    if (album_date[0] == year)
+                                    foreach (SimpleAlbum simple_album in item.Albums.Items)
                                     {
-                                        spotify.PlayURL(simple_album.Uri);
-                                        return;
+                                        String[] album_date = simple_album.ReleaseDate.Split('-');
+                                        if (album_date[0] == year)
+                                        {
+                                            spotify.PlayURL(simple_album.Uri);
+                                            return;
+                                        }
                                     }
+                                    t.Speak("There is no album from that artist on that year");
                                 }
-                                t.Speak("There is no album from that artist on that year");
+                                else
+                                {
+                                    t.Speak("There is no album from that artist on that year");
+                                }
                             }
-                            else
-                            {
-                                t.Speak("There is no album from that artist on that year");
-                            }
-                        }
                         // I wanna listen {song}
                         else if (artist == "EMP" && genre == "EMP" && song != "EMP" && from == "EMP" && year == "EMP")
-                        {
-                            item = webSpotify.SearchItems(song, SearchType.Track);
-                            if (item.Tracks.Items.Count > 0)
                             {
-                                spotify.PlayURL(item.Tracks.Items[0].Uri);
+                                item = webSpotify.SearchItems(song, SearchType.Track);
+                                if (item.Tracks.Items.Count > 0)
+                                {
+                                    spotify.PlayURL(item.Tracks.Items[0].Uri);
+                                }
+                                else
+                                {
+                                    t.Speak("There is no song with that name");
+                                }
                             }
-                            else
-                            {
-                                t.Speak("There is no song with that name");
-                            }
-                        }
                         // I wanna listen {album}
-                        else if (album != "EMP" && artist == "EMP" && genre == "EMP" && song == "EMP" && from == "EMP" && year == "EMP" )
-                        {
-                            item = webSpotify.SearchItems(album, SearchType.Album);
-                            if (item.Albums.Items.Count > 0)
+                        else if (album != "EMP" && artist == "EMP" && genre == "EMP" && song == "EMP" && from == "EMP" && year == "EMP")
                             {
-                                spotify.PlayURL(item.Albums.Items[0].Uri);
+                                item = webSpotify.SearchItems(album, SearchType.Album);
+                                if (item.Albums.Items.Count > 0)
+                                {
+                                    spotify.PlayURL(item.Albums.Items[0].Uri);
+                                }
+                                else
+                                {
+                                    t.Speak("There is no album with that name");
+                                }
                             }
-                            else
-                            {
-                                t.Speak("There is no album with that name");
-                            }
-                        }
                         // I wanna listen {genre}
                         else if (artist == "EMP" && genre != "EMP" && song == "EMP" && album == "EMP" && from == "EMP" && year == "EMP")
-                        {
-                            item = webSpotify.SearchItems(genre, SearchType.Album | SearchType.Track | SearchType.Playlist);
-                            int results_size = item.Playlists.Items.Count;
-                            if (results_size > 0)
                             {
+                                item = webSpotify.SearchItems(genre, SearchType.Album | SearchType.Track | SearchType.Playlist);
+                                int results_size = item.Playlists.Items.Count;
+                                if (results_size > 0)
+                                {
                                 // Choose playlist randomly
                                 Random random = new Random();
-                                int index = random.Next(0, results_size);
-                                spotify.PlayURL(item.Playlists.Items[index].Uri);
+                                    int index = random.Next(0, results_size);
+                                    spotify.PlayURL(item.Playlists.Items[index].Uri);
+                                }
+                                else
+                                {
+                                    t.Speak("There are no playlists with that genre");
+                                }
                             }
                             else
                             {
-                                t.Speak("There are no playlists with that genre");
+                                t.Speak("I am very sorry but this command is not supported");
                             }
                         }
-                        else
-                        {
-                            t.Speak("I am very sorry but this command is not supported");
-                        }
-                    }
-                });
-                    break;
+                    });
+                        break;
 
-                default:
-                    t.Speak("I am very sorry but this command is not supported");
-                    break;
+                    default:
+                        t.Speak("I am very sorry but this command is not supported");
+                        break;
+                }
             }
         }
     }
