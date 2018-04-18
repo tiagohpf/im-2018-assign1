@@ -98,6 +98,7 @@ namespace AppGui
                         break;
                     case "QUIT":
                         Environment.Exit(0);
+			t.Speak("Bye Bye");
                         break;
                     case "PLAY":
                         spotify.Play();
