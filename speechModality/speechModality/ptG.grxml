@@ -11,8 +11,8 @@
         <tag>out.album = rules.latest();</tag>
       </item>
       <item>
-        <ruleref uri="#song_1"/>
-        <tag>out.song_1 = rules.latest();</tag>
+        <ruleref uri="#song"/>
+        <tag>out.song = rules.latest();</tag>
       </item>
       <item>
         <ruleref uri="#by"/>
@@ -145,6 +145,22 @@
       <item>
         Unmute<tag>out = "UNMUTE"</tag>
       </item>
+
+      <item>
+        Bye Bye<tag>out = "QUIT"</tag>
+      </item>
+      <item>
+        I wanna quit<tag>out = "QUIT"</tag>
+      </item>
+      <item>
+        I want to leave<tag>out = "QUIT"</tag>
+      </item>
+      <item>
+        Turn Off the app<tag>out = "QUIT"</tag>
+      </item>
+      <item>
+        Stop everything<tag>out = "QUIT"</tag>
+      </item>
     </one-of>
   </rule>
 
@@ -164,7 +180,7 @@
     </one-of>
   </rule>
 
-  <rule id="song_1">
+  <rule id="song">
     <one-of>
       <item>
         <tag>out = "EMP"</tag>
