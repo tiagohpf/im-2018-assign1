@@ -193,14 +193,41 @@ namespace AppGui
                             }
                         }
                         else {
-                            // I wanna listen {artist} or {something}
+                            // I wanna listen {artist} or {something} or {something I like}
                             if (artist != "EMP" && from == "EMP")
                             {
                                 switch (artist)
                                 {
+                                    case "LIKE":
+                                        Paging<SimplePlaylist> playlists = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i");
+                                        int size = playlists.Items.Count;
+                                        if (size == 0)
+                                        {
+                                            t.Speak("You don't have playlists.");
+                                        }
+                                        else
+                                        {
+                                            Random random = new Random();
+                                            int index = random.Next(0, size);
+                                            SimplePlaylist playlist = playlists.Items[index];
+                                            if (playlist.Tracks.Total == 0 && size == 1)
+                                            {
+                                                t.Speak("Your playlist is empty.");
+                                            }
+                                            else
+                                            {
+                                                while (playlist.Tracks.Total == 0)
+                                                {
+                                                    random = new Random();
+                                                    index = random.Next(0, size);
+                                                    playlist = playlists.Items[index];
+                                                }
+                                                spotify.PlayURL(playlists.Items[index].Uri);
+                                            }
+                                        }
+                                        break;
                                     case "SOMETHING":
-                                        String playlist = webSpotify.GetUserPlaylists(userId: "4lzrg4ac5nyj1f5bosl1pse1i").Items[0].Uri;
-                                        spotify.PlayURL(playlist);
+                                        spotify.Play();
                                         break;
                                     default:
                                         item = webSpotify.SearchItems(artist, SearchType.Artist);

@@ -170,7 +170,10 @@
         <tag>out = "EMP"</tag>
       </item>
       <item>
-        something I like<tag>out = "SOMETHING"</tag>
+        something I like<tag>out = "LIKE"</tag>
+      </item>
+      <item>
+        anything<tag>out = "SOMETHING"</tag>
       </item>
       <item>Queen</item>
       <item>David Bowie</item>
