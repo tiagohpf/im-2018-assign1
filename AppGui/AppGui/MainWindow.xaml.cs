@@ -97,8 +97,8 @@ namespace AppGui
                         t.Speak("You can play or stop music, skip and go back, mute and unmute and play artists, genres and songs.");
                         break;
                     case "QUIT":
+                        t.Speak("Bye Bye");
                         Environment.Exit(0);
-			t.Speak("Bye Bye");
                         break;
                     case "PLAY":
                         spotify.Play();
