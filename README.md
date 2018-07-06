@@ -12,6 +12,14 @@ Install-Package SpotifyAPI-NET -Version 2.18.1
 ```
 After that, go to Tools tab again and choose  the option "Manage NuGet Packages for Solution" to check if you have all updates installed.
 
+## How To Run
+1. Go to **IM Runtime** folder, open the cmd executable and use the following command:
+```
+java -jar mmiframeworkV2
+```
+2. Open **Spotify**
+4. Open and run the two Visual Studio projects: **AppGui** and **speechModality** 
+
 ## Login
 
 To enter in Spotify, you've to use the following credentials:
